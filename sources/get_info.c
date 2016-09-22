@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 19:39:37 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/22 17:11:08 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/09/23 01:29:54 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void	get_map(t_env *env)
 		{
 			ft_memmove(env->map[i], &line[4], env->size_map_x);
 			++i;
+		}
+		if (i == env->size_map_y)
+		{
+			free(line);
+			break ;
 		}
 		free(line);
 	}

@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 19:21:22 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/22 17:10:47 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/09/23 01:31:26 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/filler.h"
 
-void	alloc_map(t_env *env)
+void	alloc_map_and_piece(t_env *env)
 {
 	int	i;
 
@@ -30,22 +30,34 @@ int	main(int argc, char **argv)
 {
 	t_env	env;
 	char	*line;
+	int i, j;
 
-	(void)line;
 	if (argc > 1)
 		return (EXIT_FAILURE);
 	init_struct(&env);
 	get_info_header(&env, &argv[0]);
-	alloc_map(&env);
+	alloc_map_and_piece(&env);
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
-		if (env.step == 0)
+		i = 0;
+		j = 0;
+		/*if (env.step == 0)*/
 			get_map(&env);
-		if (env.step == 1)
+		/*if (env.step == 1)*/
 			get_piece(&env);
+		while (i < env.size_map_y)
+		{
+			printf("%s\n", env.map[i]);
+			++i;
+		}
+		while (j < env.size_piece_y)
+		{
+			printf("%s\n", env.piece[j]);
+			++j;
+		}
 		free(line);
-	}
-	/*tab_free(env.map, env.size_map_y);*/
 	tab_free(env.piece, env.size_piece_y);
-	sleep(10);
+	}
+	tab_free(env.map, env.size_map_y);
+	/*sleep(10);*/
 }
