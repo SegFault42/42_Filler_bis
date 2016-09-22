@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 19:39:37 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/22 03:19:24 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/09/22 17:11:08 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,13 @@ void	get_map(t_env *env)
 	int		i;
 
 	i = 0;
-	get_size_map(env);
-	env->map = (char **)malloc(sizeof(char *) * env->size_map_y);
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
-		if (ft_strstr(line, "000 ") != NULL)
+		if (ft_isdigit(line[0]) != 0)
 		{
-			env->map[i] = ft_strdup(&line[4]);
+			ft_memmove(env->map[i], &line[4], env->size_map_x);
 			++i;
-			free(line);
-			break ;
 		}
-		free(line);
-	}
-	while (i < env->size_map_y)
-	{
-		get_next_line(STDIN_FILENO, &line);
-		env->map[i] = ft_strdup(&line[4]);
-		++i;
 		free(line);
 	}
 	env->step = 1;
