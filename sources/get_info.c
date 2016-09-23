@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 19:39:37 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/23 01:29:54 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/09/23 04:44:22 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	get_piece(t_env *env)
 
 	i = 0;
 	get_size_piece(env);
-	env->piece = (char **)malloc(sizeof(char *) * env->size_piece_y);
-	while (i < env->size_piece_y)
+	env->piece = (char **)malloc(sizeof(char *) * env->size_form_y);
+	while (i < env->size_form_y)
 	{
 		get_next_line(STDIN_FILENO, &line);
 		env->piece[i] = ft_strdup(line);
@@ -42,11 +42,11 @@ void	get_size_piece(t_env *env)
 		{
 			while (ft_isdigit(line[i]) != 1)
 				++i;
-			env->size_piece_y = ft_atoi(&line[i]);
-			len = ft_itoa(env->size_piece_y);
+			env->size_form_y = ft_atoi(&line[i]);
+			len = ft_itoa(env->size_form_y);
 			i += ft_strlen(len);
 			free(len);
-			env->size_piece_x = ft_atoi(&line[i]);
+			env->size_form_x = ft_atoi(&line[i]);
 			free(line);
 			return ;
 		}
