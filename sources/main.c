@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 19:21:22 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/23 01:31:26 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/09/23 02:38:33 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ int	main(int argc, char **argv)
 			get_piece(&env);
 		while (i < env.size_map_y)
 		{
-			printf("%s\n", env.map[i]);
+			printf(YELLOW"%s\n"END, env.map[i]);
 			++i;
 		}
 		while (j < env.size_piece_y)
 		{
-			printf("%s\n", env.piece[j]);
+			printf(CYAN"%s\n"END, env.piece[j]);
 			++j;
 		}
 		free(line);
 	tab_free(env.piece, env.size_piece_y);
 	}
 	tab_free(env.map, env.size_map_y);
-	/*sleep(10);*/
+	sleep(10);
 }
