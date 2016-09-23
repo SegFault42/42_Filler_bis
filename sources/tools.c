@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 01:02:35 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/23 04:43:38 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/09/23 21:53:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,17 @@ void	init_struct(t_env *env)
 	env->step = 0;
 	env->size_form_y = 0;
 	env->size_form_x = 0;
-	env->len_piece_x = 0;
-	env->len_piece_y = 0;
+	env->len_piece_hor = 0;
+	env->len_piece_ver = 0;
+	env->pos_p1 = 0;
+	env->pos_p2 = 0;
+	env->start = 0;
 }
 
 void	re_init(t_env *env)
 {
-	env->len_piece_x = 0;
-	env->len_piece_y = 0;
+	env->len_piece_hor = 0;
+	env->len_piece_ver = 0;
 }
 
 void	tab_free(char **tab, int size)

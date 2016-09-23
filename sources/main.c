@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 19:21:22 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/23 05:01:37 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/09/23 22:19:24 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	len_piece_xy(t_env *env)
 	while(i < env->size_form_y)
 	{
 		if (ft_strstr(env->piece[i], "*") != NULL)
-			++env->len_piece_y;
+			++env->len_piece_ver;
 		++i;
 	}
 	i = 0;
@@ -35,8 +35,8 @@ void	len_piece_xy(t_env *env)
 			{
 				if (env->piece[i][j] == '*')
 					++tmp;
-				if (tmp > env->len_piece_x)
-					env->len_piece_x = tmp;
+				if (tmp > env->len_piece_hor)
+					env->len_piece_hor = tmp;
 				++j;
 			}
 		tmp = 0;
@@ -44,8 +44,37 @@ void	len_piece_xy(t_env *env)
 	}
 }
 
+int	check_start_position(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (i < env->size_map_y)
+	{
+		if (ft_strstr(env->map[i], "O") != NULL)
+		{
+			if (i <= env->size_map_y / 2)
+			{
+				env->pos_p1 = 1;
+				env->pos_p2 = 2;
+				return (1);
+			}
+			else
+			{
+				env->pos_p1 = 2;
+				env->pos_p2 = 1;
+				return (1);
+			}
+		}
+		++i;
+	}
+	return (-1);
+}
+
 void	resolv(t_env *env)
 {
+	if (env->start == 0)
+		env->start = check_start_position(env);
 	len_piece_xy(env);
 }
 
@@ -61,17 +90,14 @@ int	main(int argc, char **argv)
 	alloc_map(&env);
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
-		/*if (env.step == 0)*/
 		get_map(&env);
-		/*if (env.step == 1)*/
 		get_piece(&env);
 		resolv(&env);
-		printf("y = %d - ", env.len_piece_y);
-		printf("x = %d\n", env.len_piece_x);
 		re_init(&env);
 		free(line);
 		tab_free(env.piece, env.size_form_y);
 	}
+	printf("%d\n", env.pos_p1);
 	tab_free(env.map, env.size_map_y);
-	/*sleep(10);*/
+	sleep(10);
 }

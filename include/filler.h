@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 17:46:47 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/23 04:43:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/09/23 21:53:38 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ typedef struct	s_env
 	int			step;
 	int			size_form_x;
 	int			size_form_y;
-	int			len_piece_x;
-	int			len_piece_y;
+	int			len_piece_hor;
+	int			len_piece_ver;
+	int			pos_p1;
+	int			pos_p2;
+	int			start;
 }				t_env;
 /*
 ** get_info.c
