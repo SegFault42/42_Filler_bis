@@ -6,9 +6,11 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/09/22 03:25:58 by rabougue         ###   ########.fr        #
+#    Updated: 2016/08/10 18:44:14 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+PRE = ./ft_fprintf/sources/
 
 NAME = libft.a
 
@@ -28,43 +30,35 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c \
 	  ft_count_2d_tab.c ft_itoa_base.c ft_strclen.c ft_hexa_itoa.c \
 	  ft_put_long.c ft_ltoa.c ft_put_ulong.c ft_ltoa_base.c ft_ultoa.c \
 	  ft_hexa_ltoa.c ft_ultoa_base.c ft_size_ttoa.c \
-	  ./ft_printf/sources/ft_printf.c ./ft_printf/sources/percent_c.c \
-	  ./ft_printf/sources/percent_s.c ./ft_printf/sources/percent_d.c \
-	  ./ft_memalloc_2d.c
+	  $(PRE)ft_fprintf.c $(PRE)percent_c.c \
+	  $(PRE)percent_d.c $(PRE)percent_s.c \
+	  $(PRE)tools.c \
 
 OBJS = $(SRC:.c=.o)
 
 CC = clang
 
-FLAG = -Wall -Wextra -Werror 
+FLAG = -Wall -Wextra -Werror
 
-HEAD = ./includes/ ./ft_printf/includes/ft_printf.h
+HEAD = ./includes/ ./ft_fprintf/includes/ft_fprintf.h
 
 all: $(NAME)
 
 $(NAME): $(OBJS) ./includes/libft.h
-#	@echo "\033[33mCompiling in .o ...\033[0m"
-	@$(CC) $(FLAG) -c $(SRC) -I $(HEAD)
-#	@echo "\033[33mCreating library ...\033[0m"
+	$(CC) $(FLAG) -c $(SRC) -I $(HEAD)
 	@ar rc $(NAME) $(OBJS)
-#	@echo "\033[33mIndexing library ...\033[0m"
 	@ranlib $(NAME)
-#	@echo "\033[32mLibrary Created !\033[0m"
 
 %.o : %.c $(HEAD)
-	@echo "✅ " $(notdir $<)
-	@$(CC) -c $(FLAG) $< -o $@
+	$(CC) -c $(FLAG) $< -o $@
 
 mc: fclean all clean
 
 clean:
-#	@echo "\033[31mdeleting all .o ...\033[0m"
-	@rm -f $(OBJS) ./percent_c.o ./percent_d.o ./percent_s.o ./ft_printf.o
-#	@echo "\033[32mThe folder is clean !\033[0m"
+	@rm -f $(OBJS) ./percent_c.o ./percent_d.o ./percent_s.o ./ft_fprintf.o \
+	./tools.o
 
-fclean:
-#	@echo "\033[31mDeleting libft.a and all .o ...\033[0m"
-	@rm -f $(NAME) $(OBJS) ./percent_c.o ./percent_d.o ./percent_s.o ./ft_printf.o
-#	@echo "\033[32mThe folder is clean\033[0m"
+fclean: clean
+	@rm -f $(NAME)
 
 re: fclean all

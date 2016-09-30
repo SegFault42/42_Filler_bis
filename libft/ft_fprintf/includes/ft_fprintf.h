@@ -10,14 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_FPRINTF_H
+# define FT_FPRINTF_H
 
 # include <stdarg.h>
-# include <wchar.h>
 # include "../../includes/libft.h"
-
-# define F format
 
 typedef struct	s_printf
 {
@@ -30,9 +27,14 @@ typedef struct	s_printf
 	int			i;
 }				t_printf;
 
-int				ft_printf(const char *format, ...);
+int				ft_fprintf(int fd, const char *format, ...);
 void			percent_d(t_printf *print, va_list pa);
 void			percent_s(t_printf *print, va_list pa);
 void			percent_c(t_printf *print, va_list pa);
-
+void			percent_l(t_printf *print, va_list pa);
+/*
+** tools.c
+*/
+void			print_buff(t_printf *print, int *fd);
+void			init_struct(t_printf *print);
 #endif

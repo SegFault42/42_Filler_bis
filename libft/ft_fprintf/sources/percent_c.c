@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   percent_s.c                                        :+:      :+:    :+:   */
+/*   percent_c.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/14 15:06:29 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/14 15:06:45 by rabougue         ###   ########.fr       */
+/*   Created: 2016/08/14 15:06:00 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/14 15:50:16 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_fprintf.h"
 
-void	percent_s(t_printf *print, va_list pa)
+void	percent_c(t_printf *print, va_list pa)
 {
-	char	*s;
+	char	c;
 
-	s = va_arg(pa, char *);
-	if (print->is_percent_s == 1)
+	c = va_arg(pa, int);
+	if (print->is_percent_c == 1)
 	{
-		if (s == 0)
-		{
-			ft_strcat(print->buff, "(null)");
-			print->i += 6;
-		}
-		else
-		{
-			ft_strcat(print->buff, s);
-			print->i += ft_strlen(s);
-		}
-	}
-	if (s == 0)
-	{
-		print->buff_size += 6;
-		return ;
+		print->buff[print->i] = c;
+		++print->i;
 	}
 	else
-		print->buff_size += ft_strlen(s);
+		++print->buff_size;
 }

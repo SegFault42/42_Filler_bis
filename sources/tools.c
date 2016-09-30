@@ -26,7 +26,7 @@ void	alloc_map(t_env *env)
 	}
 }
 
-void	init_struct(t_env *env)
+void	init_filler_struct(t_env *env)
 {
 	env->map = NULL;
 	env->piece = NULL;

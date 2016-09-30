@@ -10,18 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
-
-void	init_struct(t_printf *print)
-{
-	print->buff = NULL;
-	print->buff_size = 0;
-	print->ret = 0;
-	print->is_percent_c = 0;
-	print->is_percent_s = 0;
-	print->is_percent_d = 0;
-	print->i = 0;
-}
+#include "../includes/ft_fprintf.h"
 
 void	count_buff_size(t_printf *print, const char *format, va_list pa)
 {
@@ -51,15 +40,15 @@ void	specifier(const char *format, va_list pa, t_printf *print)
 {
 	if (*format == 'c')
 		percent_c(print, pa);
-	else if (*format == 'd')
+	else if (*format == 'd' || *format == 'i')
 		percent_d(print, pa);
 	else if (*format == 's')
 		percent_s(print, pa);
 }
 
-void	write_string(t_printf *print, const char *format, va_list pa)
+void	write_string(t_printf *print, const char *format, va_list pa, int *fd)
 {
-	print->buff = (char *)malloc(sizeof(char) * print->buff_size + 1);
+	print->buff = ft_memalloc(print->buff_size + 1);
 	while (*format)
 	{
 		if (*format == '%')
@@ -69,10 +58,11 @@ void	write_string(t_printf *print, const char *format, va_list pa)
 				++format;
 			if (*format == '%')
 			{
-				strcat(print->buff, "%");
+				ft_strcat(print->buff, "%");
 				print->i++;
 			}
-			specifier(format, pa, print);
+			else
+				specifier(format, pa, print);
 		}
 		else
 		{
@@ -81,12 +71,10 @@ void	write_string(t_printf *print, const char *format, va_list pa)
 		}
 		++format;
 	}
-	print->buff[print->i] = '\0';
-	ft_putstr(print->buff);
-	free(print->buff);
+	print_buff(print, fd);
 }
 
-int		ft_printf(const char *format, ...)
+int		ft_fprintf(int fd, const char *format, ...)
 {
 	t_printf	print;
 	va_list		pa;
@@ -101,7 +89,7 @@ int		ft_printf(const char *format, ...)
 	print.is_percent_d = 1;
 	print.is_percent_c = 1;
 	va_start(pa, format);
-	write_string(&print, format, pa);
+	write_string(&print, format, pa, &fd);
 	va_end(pa);
 	return (ft_strlen(print.buff));
 }

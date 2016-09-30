@@ -43,7 +43,7 @@ void			get_size_piece(t_env *env);
 /*
 ** tools.c
 */
-void			init_struct(t_env *env);
+void			init_filler_struct(t_env *env);
 void			tab_free(char **tab, int size);
 void			alloc_map(t_env *env);
 void			re_init(t_env *env);

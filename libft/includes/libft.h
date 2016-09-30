@@ -17,7 +17,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../ft_printf/includes/ft_printf.h"
+# include "../ft_fprintf/includes/ft_fprintf.h"
 # include "./colors.h"
 
 /*
@@ -34,6 +34,7 @@
 # define RC ft_putchar('\n');
 
 typedef unsigned int	uint;
+typedef unsigned long	ulong;
 
 typedef struct		s_list
 {

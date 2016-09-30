@@ -75,6 +75,10 @@ void	resolv(t_env *env)
 {
 	if (env->start == 0)
 		env->start = check_start_position(env);
+	if (env->start == 1)
+	{
+		
+	}
 	len_piece_xy(env);
 }
 
@@ -85,7 +89,7 @@ int	main(int argc, char **argv)
 
 	if (argc > 1)
 		return (EXIT_FAILURE);
-	init_struct(&env);
+	init_filler_struct(&env);
 	get_info_header(&env, &argv[0]);
 	alloc_map(&env);
 	while (get_next_line(STDIN_FILENO, &line) > 0)
@@ -97,7 +101,6 @@ int	main(int argc, char **argv)
 		free(line);
 		tab_free(env.piece, env.size_form_y);
 	}
-	printf("%d\n", env.pos_p1);
 	tab_free(env.map, env.size_map_y);
-	sleep(10);
+	/*sleep(10);*/
 }
