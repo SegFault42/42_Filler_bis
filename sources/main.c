@@ -95,12 +95,14 @@ int	main(int argc, char **argv)
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
 		get_map(&env);
+		ft_print_2d_tab(env.map, env.size_map_y);
 		get_piece(&env);
+		ft_print_2d_tab(env.piece, env.size_form_y);
 		resolv(&env);
 		re_init(&env);
 		free(line);
-		tab_free(env.piece, env.size_form_y);
 	}
+	tab_free(env.piece, env.size_form_y);
 	tab_free(env.map, env.size_map_y);
 	/*sleep(10);*/
 }

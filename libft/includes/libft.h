@@ -127,5 +127,6 @@ char				*ft_ultoa_base(unsigned long value, int base);
 size_t				ft_size_ttoa(size_t n);
 
 char				**ft_memalloc_2d(size_t size_1, size_t size_2);
+void				ft_print_2d_tab(char **tab, int size_y);
 
 #endif

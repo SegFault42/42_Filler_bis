@@ -19,9 +19,11 @@ void	alloc_map(t_env *env)
 	i = 0;
 	get_size_map(env);
 	env->map = (char **)malloc(sizeof(char *) * env->size_map_y);
+	env->piece = (char **)malloc(sizeof(char *) * env->size_map_y);
 	while (i < env->size_map_y)
 	{
 		env->map[i] = ft_memalloc(env->size_map_x + 1);
+		env->piece[i] = ft_memalloc(env->size_map_x + 1);
 		++i;
 	}
 }
@@ -46,8 +48,16 @@ void	init_filler_struct(t_env *env)
 
 void	re_init(t_env *env)
 {
+	int	i;
+
+	i = 0;
 	env->len_piece_hor = 0;
 	env->len_piece_ver = 0;
+	while (i < env->size_form_y)
+	{
+		ft_memset(env->piece[i], 0, env->size_form_x);
+		++i;
+	}
 }
 
 void	tab_free(char **tab, int size)
