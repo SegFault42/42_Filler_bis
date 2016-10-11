@@ -3,8 +3,8 @@
 # 42 / filler VM Developped by: Hcao - Abanlin #
 #                                              #
 # -------------------------------------------- #
-launched ./resources/players/carli.filler
-$$$ exec p1 : [./resources/players/carli.filler]
+launched ./rabougue.filler
+$$$ exec p1 : [./rabougue.filler]
 launched resources/players/abanlin.filler
 $$$ exec p2 : [resources/players/abanlin.filler]
 Plateau 24 40:

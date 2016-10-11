@@ -111,7 +111,7 @@ void	get_info_header(t_env *env, char **argv)
 	{
 		if (ft_strstr(line, "$$$ exec p1") != NULL)
 		{
-			if (ft_strstr(line, argv[0]) != NULL)
+			if (ft_strstr(line, &argv[0][2]) != NULL)
 			{
 				env->rabougue = 1;
 				env->ennemi = 2;

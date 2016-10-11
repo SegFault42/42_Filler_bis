@@ -39,11 +39,13 @@ void	init_filler_struct(t_env *env)
 	env->step = 0;
 	env->size_form_y = 0;
 	env->size_form_x = 0;
-	env->len_piece_hor = 0;
-	env->len_piece_ver = 0;
-	env->pos_p1 = 0;
-	env->pos_p2 = 0;
+	env->size_piece_x = 0;
+	env->size_piece_y = 0;
 	env->start = 0;
+	env->last_x = 0;
+	env->last_y = 0;
+	env->empty_line_form_up = 0;
+	env->empty_point_form_left = 0;
 }
 
 void	re_init(t_env *env)
@@ -51,8 +53,8 @@ void	re_init(t_env *env)
 	int	i;
 
 	i = 0;
-	env->len_piece_hor = 0;
-	env->len_piece_ver = 0;
+	env->size_piece_x = 0;
+	env->size_piece_y = 0;
 	while (i < env->size_form_y)
 	{
 		ft_memset(env->piece[i], 0, env->size_form_x);

@@ -14,23 +14,48 @@
 # define FILLER_H
 
 # include "../libft/includes/libft.h"
-
+#include <stdio.h>
+/*=============================================================================
+** if a player == 1, the player is player one.
+** if a player == 2, the player is player two.
+** if a player == 3, the player is player one and he is higher in the map.
+** if a player == 4, the player is player one and he is lower in the map.
+** if a player == 5, the player is player two and he is higher in the map.
+** if a player == 6, the player is player two and he is lower in the map.
+*==============================================================================
+*/
+/*=============================================================================
+** form = carre entier (donner par la vm)
+** piece = uniquement la piece dessiner par les etoiles
+*==============================================================================
+*/
 typedef struct	s_env
 {
 	char		**map;
 	char		**piece;
+//=============================================================================
 	int			rabougue;
 	int			ennemi;
+//=============================================================================
 	int			size_map_x;
 	int			size_map_y;
+//=============================================================================
 	int			step;
+//=============================================================================
 	int			size_form_x;
 	int			size_form_y;
-	int			len_piece_hor;
-	int			len_piece_ver;
-	int			pos_p1;
-	int			pos_p2;
+//=============================================================================
+	int			size_piece_x;
+	int			size_piece_y;
+//=============================================================================
 	int			start;
+//=============================================================================
+	int			last_x;
+	int			last_y;
+//=============================================================================
+	int			empty_line_form_up;
+	int			empty_point_form_left;
+//=============================================================================
 }				t_env;
 /*
 ** get_info.c
