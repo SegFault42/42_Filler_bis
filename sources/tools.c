@@ -53,8 +53,8 @@ void	re_init(t_env *env)
 	int	i;
 
 	i = 0;
-	env->size_piece_x = 0;
-	env->size_piece_y = 0;
+	/*env->size_piece_x = 0;*/
+	/*env->size_piece_y = 0;*/
 	while (i < env->size_form_y)
 	{
 		ft_memset(env->piece[i], 0, env->size_form_x);

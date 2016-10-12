@@ -57,6 +57,16 @@ typedef struct	s_env
 	int			empty_point_form_left;
 //=============================================================================
 }				t_env;
+
+typedef struct	s_fful
+{
+	int			piece_x;
+	int			piece_y;
+	int			map_x;
+	int			map_y;
+	int			me;
+	int			ennemi;
+}				t_fful;
 /*
 ** get_info.c
 */
@@ -73,4 +83,6 @@ void			tab_free(char **tab, int size);
 void			alloc_map(t_env *env);
 void			re_init(t_env *env);
 
+void			fill_from_up_left(t_env *env);
+void			count_empty_line_form_up(t_env *env);
 #endif

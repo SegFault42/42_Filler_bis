@@ -193,18 +193,38 @@ void	place_piece(t_env *env)
 	}
 	//=========================================================================
 	count_empty_line_form_up(env);
-	if (((env->last_y + env->size_form_y) - env->empty_line_form_up) > env->size_map_y || (env->last_x + env->size_form_x) > env->size_map_x)
+	/*if (ft_strstr(env->map[env->size_map_y], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)*/
+	/*{*/
+		/*fill_from_up_left(env);*/
+	/*}*/
+	//=========================================================================
+	//pour stopper une fois qu'un trait vertical est tracer
+	/*if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)*/
+	/*{*/
+		/*sleep(1);*/
+	/*}*/
+	//=========================================================================
+	if (((env->last_y + env->size_form_y) - env->empty_line_form_up) > env->size_map_y || (env->last_x + env->size_form_x) > env->size_map_x )
 	{
-		/*fill_from_up_right(env);*/
-		sleep(10);
+		fill_from_up_left(env);
+		return ;
 	}
-	if (ennemi == 0)
+	else if (ennemi == 0 /*&& (ft_strstr(env->map[env->size_map_y - 1], "O") == NULL || ft_strstr(env->map[0], "O") == NULL)*/)
+	{
 		ft_fprintf(1, "%d %d\n", (env->last_y - substract_y), (env->last_x - substract_x));
+		return ;
+	}
+	else
+	{
+		/*sleep(10);*/
+		ft_fprintf(1, "0 0\n");
+		return ;
+	}
 }
 
 void	split_map(t_env *env)
 {
-	if (env->rabougue == 3)
+	if (env->rabougue == 3 /*4*/)
 	{
 		where_is_the_lower(env);
 		place_piece(env);
