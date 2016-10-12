@@ -67,6 +67,17 @@ typedef struct	s_fful
 	int			me;
 	int			ennemi;
 }				t_fful;
+
+typedef struct	s_ffdr
+{
+	int			piece_x;
+	int			piece_y;
+	int			map_x;
+	int			map_y;
+	int			me;
+	int			ennemi;
+}				t_ffdr;
+
 /*
 ** get_info.c
 */
