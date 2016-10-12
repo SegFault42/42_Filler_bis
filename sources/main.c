@@ -254,7 +254,6 @@ int	main(int argc, char **argv)
 		re_init(&env);
 		free(line);
 	}
-	tab_free(env.piece, env.size_form_y);
+	tab_free(env.piece, env.size_map_y);
 	tab_free(env.map, env.size_map_y);
-	/*sleep(10);*/
 }
