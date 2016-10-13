@@ -540,7 +540,7 @@ if __FILE__ == $0
 					end
 
 					if (player.live > 0 && init.verbose > 0)
-						puts "<got (#{player.piece_char}): [#{nb[0]}, #{nb[1]}]"
+						puts "<got (#{player.piece_char}): [#{nb[0]}, #{nb[1]}"
 					end
 
 					if (player.live > 0 && map.check_placement(nb[0].to_i, nb[1].to_i, player.piece_char) == 1)

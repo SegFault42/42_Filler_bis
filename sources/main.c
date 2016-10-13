@@ -215,13 +215,6 @@ void	place_piece(t_env *env)
 		}
 		++y;
 	}
-	//=========================================================================
-	if ((ft_strstr(env->map[env->size_map_y - 1], "O") == NULL || ft_strstr(env->map[0], "O") == NULL) &&
-		check_if_ennemi(env) == EXIT_FAILURE)
-	{
-	// lancer fonction fill_from_down_right;
-	}
-	//=========================================================================
 	count_empty_line_form_up(env);
 	/*if (ft_strstr(env->map[env->size_map_y], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)*/
 	/*{*/
@@ -231,8 +224,22 @@ void	place_piece(t_env *env)
 	//pour stopper une fois qu'un trait vertical est tracer
 		if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)
 		{
-			sleep(1);
+			/*sleep(1);*/
+			fill_from_up_left(env);
+			/*fill_from_down_right(env);*/
+			return ;
 		}
+	//=========================================================================
+	//=========================================================================
+	//pour fermer la map en bas si je percute l'adverssaire avant de fermer.
+	if ((ft_strstr(env->map[env->size_map_y - 1], "O") == NULL || ft_strstr(env->map[0], "O") == NULL) && check_if_ennemi(env) == EXIT_FAILURE)
+	{
+		if (ft_strstr(env->map[env->size_map_y - 1], "O") == NULL)
+		{
+			fill_from_down_right(env);
+			return ;
+		}
+	}
 	//=========================================================================
 	if (((env->last_y + env->size_form_y) - env->empty_line_form_up) > env->size_map_y ||
 	(env->last_x + env->size_form_x) > env->size_map_x )
@@ -275,11 +282,13 @@ void	split_map(t_env *env)
 int	main(int argc, char **argv)
 {
 	t_env	env;
+	t_bonus	bonus;
 	char	*line;
 
 	if (argc > 1)
 		return (EXIT_FAILURE);
 	init_filler_struct(&env);
+	init_bonus_struct(&bonus);
 	get_info_header(&env, &argv[0]);
 	alloc_map(&env);
 	while (get_next_line(STDIN_FILENO, &line) > 0)
@@ -295,6 +304,8 @@ int	main(int argc, char **argv)
 		re_init(&env);
 		free(line);
 	}
+	aff_map(&env, &bonus);
+	aff_percent_map(&bonus);
 	tab_free(env.piece, env.size_map_y);
 	tab_free(env.map, env.size_map_y);
 }

@@ -78,6 +78,14 @@ typedef struct	s_ffdr
 	int			ennemi;
 }				t_ffdr;
 
+typedef struct	s_bonus
+{
+	int			x;
+	int			y;
+	int			nb_o;
+	int			nb_x;
+	int			nb_point;
+}				t_bonus;
 /*
 ** get_info.c
 */
@@ -93,7 +101,15 @@ void			init_filler_struct(t_env *env);
 void			tab_free(char **tab, int size);
 void			alloc_map(t_env *env);
 void			re_init(t_env *env);
+/*
+** bonus.c
+*/
+void			init_bonus_struct(t_bonus *bonus);
+void			aff_percent_map(t_bonus *bonus);
+void			aff_map(t_env *env, t_bonus *bonus);
 
 void			fill_from_up_left(t_env *env);
+void			fill_from_down_right(t_env *env);
 void			count_empty_line_form_up(t_env *env);
+
 #endif

@@ -89,27 +89,27 @@ void	fill_from_up_left(t_env *env)
 	/*sleep (10);*/
 }
 
-static void	init_ffdr(t_ffdr *ffdr)
+static void	init_ffdr(t_ffdr *ffdr, t_env *env)
 {
 	ffdr->piece_x = 0;
 	ffdr->piece_y = 0;
-	ffdr->map_x = 0;
-	ffdr->map_y = 0;
+	ffdr->map_x = env->size_map_x - env->size_form_x;
+	ffdr->map_y = env->size_map_y - env->size_form_y;
 	ffdr->me = 0;
 	ffdr->ennemi = 0;
 }
 
-static void	re_init_ffdr(t_env * env, t_ffdr *ffdr)
+static void	re_init_ffdr(t_env *env, t_ffdr *ffdr)
 {
 	ffdr->me = 0;
 	ffdr->ennemi = 0;
 	ffdr->piece_y = 0;
 	ffdr->piece_x = 0;
-	ffdr->map_x++;
-	if (ffdr->map_x + env->size_form_x > env->size_map_x)
+	ffdr->map_x--;
+	if (ffdr->map_x == -1)
 	{
-		ffdr->map_x = 0;
-		++ffdr->map_y;
+		ffdr->map_x = env->size_map_x - env->size_form_x;
+		--ffdr->map_y;
 	}
 }
 
@@ -117,10 +117,11 @@ void	fill_from_down_right(t_env *env)
 {
 	t_ffdr	ffdr;
 
-	init_ffdr(&ffdr);
+	init_ffdr(&ffdr, env);
 	while (ffdr.piece_y < env->size_form_y)
 	{
-		if (ffdr.map_y > env->size_map_y - env->size_form_y)
+		if (ffdr.map_y < 0)
+		/*if (ffdr.map_y > env->size_map_y - env->size_form_y)*/
 		{
 			ft_fprintf(1, "0 0\n");
 			return ;
@@ -128,8 +129,7 @@ void	fill_from_down_right(t_env *env)
 		ffdr.piece_x = 0;
 		while (ffdr.piece_x < env->size_form_x)
 		{
-			if ((env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == 'o' ||
-				env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == 'O') &&
+			if ((env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == 'o' || env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == 'O') &&
 				env->piece[ffdr.piece_y][ffdr.piece_x] == '*')
 				ffdr.me++;
 			else if (env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == 'X' && env->piece[ffdr.piece_y][ffdr.piece_x] == '*')
@@ -141,32 +141,20 @@ void	fill_from_down_right(t_env *env)
 		++ffdr.piece_y;
 		if (ffdr.piece_y == env->size_form_y)
 		{
+		/*printf("me = %d, ennemi = %d\n", ffdr.me, ffdr.ennemi);*/
+		/*sleep(1);*/
 			if (ffdr.me == 1 && ffdr.ennemi == 0)
 			{
-				/*ft_fprintf(2, RED"!");*/
-				/*if (ffdr.map_y + (env->size_form_y - env->empty_line_form_up) > env->size_map_y ||*/
-					/*ffdr.map_x + (env->size_form_x - env->empty_point_form_left) > env->size_map_x)*/
-				/*{*/
-					/*ft_fprintf(2, YELLOW"!");*/
-					/*[>exit (1);<]*/
-					/*ft_fprintf(1, "0 0\n");*/
-					/*return ;*/
-				/*}*/
-				/*else*/
-				/*{*/
-					/*ft_fprintf(2, PURPLE"%d, %d\n", ffdr.map_y, env->size_map_y - env->size_form_y);*/
-					if (ffdr.map_y + (env->size_form_y - env->empty_line_form_up) <= env->size_map_y &&
-					ffdr.map_x + (env->size_form_x - env->empty_point_form_left) <= env->size_map_x)
-					{
-						ft_fprintf(1, "%d %d\n", ffdr.map_y, ffdr.map_x);
-						return ;
-					}
-					else
-					{
-						ft_fprintf(1, "0 0\n");
-						return ;
-					}
-				/*}*/
+				if (ffdr.map_y + (env->size_form_y - env->empty_line_form_up) <= env->size_map_y && ffdr.map_x + (env->size_form_x - env->empty_point_form_left) <= env->size_map_x)
+				{
+					ft_fprintf(1, "%d %d\n", ffdr.map_y, ffdr.map_x);
+					return ;
+				}
+				else
+				{
+					ft_fprintf(1, "0 0\n");
+					return ;
+				}
 			}
 			else
 			{

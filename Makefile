@@ -18,7 +18,8 @@ END = \033[0m
 CC = gcc
 FLAG =  -Wall -Wextra -Werror -g
 LFT = ./libft/libft.a
-SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c ./sources/algo.c
+SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c ./sources/algo.c\
+		./sources/bonus.c
 
 OBJS = $(SRCS:.c=.o)
 
