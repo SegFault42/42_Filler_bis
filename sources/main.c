@@ -183,6 +183,105 @@ int	check_if_ennemi(t_env *env)
 	return (EXIT_SUCCESS);
 }
 
+/*void	place_piece(t_env *env)*/
+/*{*/
+	/*int	x = 0, y = 0;*/
+	/*[>int	me = 0;<]*/
+	/*int	ennemi = 0;*/
+	/*int	substract_y = 0;*/
+	/*int	substract_x = 0;*/
+
+	/*while (ft_strstr(env->piece[y], "*") == NULL)*/
+	/*{*/
+		/*++y;*/
+		/*++substract_y;*/
+	/*}*/
+	/*while (env->piece[y][x] != '*')*/
+	/*{*/
+		/*++x;*/
+		/*++substract_x;*/
+	/*}*/
+	/*//=========================================================================*/
+	/*while (y < env->size_piece_y)*/
+	/*{*/
+		/*x = 0;*/
+		/*while (x < env->size_piece_x)*/
+		/*{*/
+			/*if ((env->map[env->last_y][env->last_x] == 'o' ||
+			 * env->map[env->last_y][env->last_x] == 'O') && env->piece[y][x] == '*')*/
+				/*[>me++;<]*/
+			/*if (env->map[env->last_y][env->last_x + x] == 'x' ||*/
+			/*env->map[env->last_y + y][env->last_x + x] == 'X')*/
+				/*ennemi++;*/
+			/*++x;*/
+		/*}*/
+		/*++y;*/
+	/*}*/
+	/*count_empty_line_form_up(env);*/
+	/*[>count_empty_point_form_left(env);<]*/
+	/*[>if (ft_strstr(env->map[env->size_map_y], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)<]*/
+	/*[>{<]*/
+		/*[>fill_from_up_left(env);<]*/
+	/*[>}<]*/
+	/*//=========================================================================*/
+	/*//pour fermer au dessus en premier*/
+	/*if (ft_strstr(env->map[0], "O") == NULL || ft_strstr(env->map[0], "o") == NULL)*/
+	/*{*/
+		/*fill_from_up_left(env);*/
+		/*[>ft_putnbr(env->last_y - substract_y);<]*/
+		/*[>ft_putchar(' ');<]*/
+		/*[>ft_putnbr((substract_x - env->last_x) - env->empty_point_form_left -1 );<]*/
+		/*[>RC;<]*/
+		/*return ;*/
+	/*}*/
+	/*//=========================================================================*/
+	/*//=========================================================================*/
+	/*//pour stopper une fois qu'un trait vertical est tracer*/
+		/*if ((ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL) ||*/
+			/*(ft_strstr(env->map[env->size_map_y - 1], "o") != NULL && ft_strstr(env->map[0], "o") != NULL))*/
+		/*{*/
+			/*[>sleep(1);<]*/
+			/*fill_from_up_left(env);*/
+			/*[>fill_from_down_right(env);<]*/
+			/*return ;*/
+		/*}*/
+	/*//=========================================================================*/
+	/*//=========================================================================*/
+	/*//pour fermer la map en bas si je percute l'adverssaire avant de fermer.*/
+	/*if ((ft_strstr(env->map[env->size_map_y - 1], "O") == NULL || ft_strstr(env->map[0], "O") == NULL ||*/
+		/*ft_strstr(env->map[env->size_map_y - 1], "o") == NULL || ft_strstr(env->map[0], "o") == NULL) && check_if_ennemi(env) == EXIT_FAILURE)*/
+	/*{*/
+		/*if (ft_strstr(env->map[env->size_map_y - 1], "O") == NULL || ft_strstr(env->map[env->size_map_y - 1], "o") == NULL)*/
+		/*{*/
+			/*fill_from_down_right(env);*/
+			/*return ;*/
+		/*}*/
+	/*}*/
+	/*//=========================================================================*/
+	/*if (((env->last_y + env->size_form_y) - env->empty_line_form_up) > env->size_map_y ||*/
+	/*(env->last_x + env->size_form_x) > env->size_map_x )*/
+	/*{*/
+		/*fill_from_up_left(env);*/
+		/*return ;*/
+	/*}*/
+	/*else if (ennemi == 0 [>&& (ft_strstr(env->map[env->size_map_y - 1], "O") == NULL || ft_strstr(env->map[0], "O") == NULL)<])*/
+	/*{*/
+		/*if (check_if_ennemi(env) == EXIT_FAILURE)*/
+		/*{*/
+			/*fill_from_up_left(env);*/
+			/*return ;*/
+		/*}*/
+		/*ft_fprintf(1, "%d %d\n", (env->last_y - substract_y), (env->last_x[> - substract_x<]));*/
+		/*return ;*/
+	/*}*/
+	/*else*/
+	/*{*/
+		/*[>sleep(10);<]*/
+		/*ft_fprintf(1, "0 0\n");*/
+		/*return ;*/
+	/*}*/
+/*}*/
+
 void	place_piece(t_env *env)
 {
 	int	x = 0, y = 0;
@@ -224,8 +323,8 @@ void	place_piece(t_env *env)
 		/*fill_from_up_left(env);*/
 	/*}*/
 	//=========================================================================
-	//pour fermer au dessus en premier
-	if (ft_strstr(env->map[0], "O") == NULL)
+	//pour fermer au dessus en premier (map00 only)
+	if (ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 15 && env->size_map_x == 17)
 	{
 		fill_from_up_left(env);
 		/*ft_putnbr(env->last_y - substract_y);*/
@@ -240,8 +339,8 @@ void	place_piece(t_env *env)
 		if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)
 		{
 			/*sleep(1);*/
-			fill_from_up_left(env);
-			/*fill_from_down_right(env);*/
+			/*fill_from_up_left(env);*/
+			fill_from_down_right(env);
 			return ;
 		}
 	//=========================================================================
@@ -260,6 +359,7 @@ void	place_piece(t_env *env)
 	(env->last_x + env->size_form_x) > env->size_map_x )
 	{
 		fill_from_up_left(env);
+		/*fill_from_down_right(env);*/
 		return ;
 	}
 	else if (ennemi == 0 /*&& (ft_strstr(env->map[env->size_map_y - 1], "O") == NULL || ft_strstr(env->map[0], "O") == NULL)*/)
@@ -306,11 +406,8 @@ int	main(int argc, char **argv)
 		get_map(&env);
 		if (env.rabougue < 2)
 			check_who_is_higher(&env);
-		/*ft_print_2d_tab(env.map, env.size_map_y);*/
 		get_piece(&env);
-		/*ft_print_2d_tab(env.piece, env.size_form_y);*/
 		split_map(&env);
-		/*resolv(&env);*/
 		re_init(&env);
 		free(line);
 	}

@@ -76,6 +76,7 @@ typedef struct	s_ffdr
 	int			map_y;
 	int			me;
 	int			ennemi;
+	int			dist_left_and_last_o;
 }				t_ffdr;
 
 typedef struct	s_bonus

@@ -89,6 +89,18 @@ void	fill_from_up_left(t_env *env)
 	/*sleep (10);*/
 }
 
+static int	calc_dist_left_and_last_o(t_env *env, t_ffdr *ffdr)
+{
+	/*int x = env->size_map_x - env->size_form_x;*/
+	/*int y = env->size_map_y - env->size_form_y;*/
+	int	x = ffdr->map_x;
+	int	y = ffdr->map_y;
+
+	while (env->map[y][x] != 'O')
+		--x;
+	return (x);
+}
+
 static void	init_ffdr(t_ffdr *ffdr, t_env *env)
 {
 	ffdr->piece_x = 0;
@@ -97,6 +109,7 @@ static void	init_ffdr(t_ffdr *ffdr, t_env *env)
 	ffdr->map_y = env->size_map_y - env->size_form_y;
 	ffdr->me = 0;
 	ffdr->ennemi = 0;
+	ffdr->dist_left_and_last_o = calc_dist_left_and_last_o(env, ffdr);
 }
 
 static void	re_init_ffdr(t_env *env, t_ffdr *ffdr)
@@ -106,6 +119,19 @@ static void	re_init_ffdr(t_env *env, t_ffdr *ffdr)
 	ffdr->piece_y = 0;
 	ffdr->piece_x = 0;
 	ffdr->map_x--;
+	if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)
+	{
+		if (ffdr->map_x + env->size_form_x < ffdr->dist_left_and_last_o)
+		{
+			ffdr->map_x = env->size_map_x - env->size_form_x;
+			--ffdr->map_y;
+			ffdr->dist_left_and_last_o = calc_dist_left_and_last_o(env, ffdr);
+		}
+		else
+		{
+			--ffdr->map_x;
+		}
+	}
 	if (ffdr->map_x == -1)
 	{
 		ffdr->map_x = env->size_map_x - env->size_form_x;
@@ -120,10 +146,11 @@ void	fill_from_down_right(t_env *env)
 	init_ffdr(&ffdr, env);
 	while (ffdr.piece_y < env->size_form_y)
 	{
-		if (ffdr.map_y < 0)
+		if (ffdr.map_y == 0)
 		/*if (ffdr.map_y > env->size_map_y - env->size_form_y)*/
 		{
-			ft_fprintf(1, "0 0\n");
+			fill_from_up_left(env);
+			/*ft_fprintf(1, "0 0\n");*/
 			return ;
 		}
 		ffdr.piece_x = 0;
@@ -147,7 +174,16 @@ void	fill_from_down_right(t_env *env)
 			{
 				if (ffdr.map_y + (env->size_form_y - env->empty_line_form_up) <= env->size_map_y && ffdr.map_x + (env->size_form_x - env->empty_point_form_left) <= env->size_map_x)
 				{
-					ft_fprintf(1, "%d %d\n", ffdr.map_y, ffdr.map_x);
+					if (ffdr.map_x < 0)
+						fill_from_up_left(env);
+					else
+					{
+						/*ft_fprintf(1, "%d %d\n", ffdr.map_y, ffdr.map_x);*/
+						ft_putnbr(ffdr.map_y);
+						ft_putchar(' ');
+						ft_putnbr(ffdr.map_x);
+						RC;
+					}
 					return ;
 				}
 				else
