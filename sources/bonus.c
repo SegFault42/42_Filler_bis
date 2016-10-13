@@ -53,17 +53,17 @@ void	aff_map(t_env *env, t_bonus *bonus)
 			if (env->map[bonus->y][bonus->x] == 'O' || env->map[bonus->y][bonus->x] == 'o')
 			{
 				++bonus->nb_o;
-				ft_putstr_fd(BRED" ", 2);
+				ft_putstr_fd(BRED"  ", 2);
 			}
 			else if (env->map[bonus->y][bonus->x] == 'X' || env->map[bonus->y][bonus->x] == 'x')
 			{
 				++bonus->nb_x;
-				ft_putstr_fd(BORANGE" ", 2);
+				ft_putstr_fd(BORANGE"  ", 2);
 			}
 			else
 			{
 				++bonus->nb_point;
-				ft_putstr_fd(BGREY" ", 2);
+				ft_putstr_fd(BGREY"  ", 2);
 			}
 		}
 		ft_putstr_fd(END"\n", 2);

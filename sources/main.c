@@ -139,25 +139,27 @@ void	count_empty_line_form_up(t_env *env)
 	env->empty_line_form_up = i;
 }
 
-/*void	count_empty_point_form_left(t_env *env)*/
-/*{*/
-	/*int	x = 0;*/
-	/*int	y = 0;*/
-	/*int	point = 0;*/
+void	count_empty_point_form_left(t_env *env)
+{
+	int	x = 0;
+	int	y = 0;
+	int	point = 0;
 
-	/*while (y < env->size_form_y)*/
-	/*{*/
-		/*while (env->piece[y][x] == '.')*/
-		/*{*/
-			/*++point;*/
-			/*++x;*/
-		/*}*/
-		/*if (point < env->empty_point_form_left)*/
-
-		/*x = 0;*/
-		/*++y;*/
-	/*}*/
-/*}*/
+	env->empty_point_form_left = env->size_form_x;
+	while (y < env->size_form_y)
+	{
+		while (env->piece[y][x] == '.')
+		{
+			++point;
+			++x;
+		}
+		if (point < env->empty_point_form_left)
+			env->empty_point_form_left = point;
+		point = 0;
+		x = 0;
+		++y;
+	}
+}
 
 int	check_if_ennemi(t_env *env)
 {
@@ -216,10 +218,23 @@ void	place_piece(t_env *env)
 		++y;
 	}
 	count_empty_line_form_up(env);
+	/*count_empty_point_form_left(env);*/
 	/*if (ft_strstr(env->map[env->size_map_y], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)*/
 	/*{*/
 		/*fill_from_up_left(env);*/
 	/*}*/
+	//=========================================================================
+	//pour fermer au dessus en premier
+	if (ft_strstr(env->map[0], "O") == NULL)
+	{
+		fill_from_up_left(env);
+		/*ft_putnbr(env->last_y - substract_y);*/
+		/*ft_putchar(' ');*/
+		/*ft_putnbr((substract_x - env->last_x) - env->empty_point_form_left -1 );*/
+		/*RC;*/
+		return ;
+	}
+	//=========================================================================
 	//=========================================================================
 	//pour stopper une fois qu'un trait vertical est tracer
 		if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)
@@ -244,11 +259,6 @@ void	place_piece(t_env *env)
 	if (((env->last_y + env->size_form_y) - env->empty_line_form_up) > env->size_map_y ||
 	(env->last_x + env->size_form_x) > env->size_map_x )
 	{
-		/*if (check_if_ennemi(env) == EXIT_FAILURE)*/
-		/*{*/
-			/*fill_from_up_left(env);*/
-			/*return ;*/
-		/*}*/
 		fill_from_up_left(env);
 		return ;
 	}
