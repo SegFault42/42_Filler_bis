@@ -56,6 +56,7 @@ typedef struct	s_env
 	int			empty_line_form_up;
 	int			empty_point_form_left;
 //=============================================================================
+	char		player;
 }				t_env;
 
 typedef struct	s_fful
@@ -102,6 +103,7 @@ void			init_filler_struct(t_env *env);
 void			tab_free(char **tab, int size);
 void			alloc_map(t_env *env);
 void			re_init(t_env *env);
+void			who_is_x_or_o(t_env *env);
 /*
 ** bonus.c
 */

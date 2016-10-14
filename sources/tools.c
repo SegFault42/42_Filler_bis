@@ -46,6 +46,7 @@ void	init_filler_struct(t_env *env)
 	env->last_y = 0;
 	env->empty_line_form_up = 0;
 	env->empty_point_form_left = 0;
+	env->player = 0;
 }
 
 void	re_init(t_env *env)
@@ -73,4 +74,16 @@ void	tab_free(char **tab, int size)
 		++i;
 	}
 	free(tab);
+}
+
+void	who_is_x_or_o(t_env *env)
+{
+	if (env->rabougue == 1)
+	{
+		env->player = 'O';
+	}
+	else
+	{
+		env->player = 'X';
+	}
 }
