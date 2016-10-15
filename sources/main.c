@@ -224,9 +224,15 @@ void	place_piece(t_env *env)
 		/*fill_from_up_left(env);*/
 	/*}*/
 	//=========================================================================
+<<<<<<< HEAD
 	//pour fermer au dessus en premier (map00 and map02 only)
 	if ((ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 15 && env->size_map_x == 17) ||
 		(ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 100))
+=======
+	//pour fermer au dessus en premier (map00 only)
+	if ((ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 15 && env->size_map_x == 17) || 
+		(ft_strstr(env->map[0], "O") == NULL && env->size_map_y > 70))
+>>>>>>> 77787f54f8e7e4cc162a69bf691e44edbaf55d8a
 	{
 		fill_from_up_left(env);
 		/*ft_putnbr(env->last_y - substract_y);*/
