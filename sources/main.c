@@ -225,7 +225,8 @@ void	place_piece(t_env *env)
 	/*}*/
 	//=========================================================================
 	//pour fermer au dessus en premier (map00 only)
-	if (ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 15 && env->size_map_x == 17)
+	if ((ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 15 && env->size_map_x == 17) || 
+		(ft_strstr(env->map[0], "O") == NULL && env->size_map_y > 70))
 	{
 		fill_from_up_left(env);
 		/*ft_putnbr(env->last_y - substract_y);*/
