@@ -224,8 +224,9 @@ void	place_piece(t_env *env)
 		/*fill_from_up_left(env);*/
 	/*}*/
 	//=========================================================================
-	//pour fermer au dessus en premier (map00 only)
-	if (ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 15 && env->size_map_x == 17)
+	//pour fermer au dessus en premier (map00 and map02 only)
+	if ((ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 15 && env->size_map_x == 17) ||
+		(ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 100))
 	{
 		fill_from_up_left(env);
 		/*ft_putnbr(env->last_y - substract_y);*/
@@ -241,7 +242,10 @@ void	place_piece(t_env *env)
 		{
 			/*sleep(1);*/
 			/*fill_from_up_left(env);*/
-			fill_from_down_right(env);
+			/*if (env->size_map_y < 70)*/
+				fill_from_down_right(env);
+			/*else*/
+				/*fill_from_up_left(env);*/
 			return ;
 		}
 	//=========================================================================
@@ -292,14 +296,28 @@ void	split_map(t_env *env)
 		place_piece(env);
 }
 
+void	arguments(char **argv, t_bonus *bonus, t_env *env)
+{
+	if (argv[1][0] == '-')
+	{
+		if (ft_strstr(argv[1], "m") != NULL)
+			aff_map(env, bonus);
+		if (ft_strstr(argv[1], "p") != NULL)
+			aff_percent_map(bonus, env);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_env	env;
 	t_bonus	bonus;
 	char	*line;
 
-	if (argc > 1)
-		return (EXIT_FAILURE);
+	/*if (argc > 2)*/
+	/*{*/
+		/*ft_fprintf(2, RED"Usage : [-m : show final map] \n");*/
+		/*ft_fprintf(2, "        [-p : show percent map]\n"END);*/
+	/*}*/
 	init_filler_struct(&env);
 	init_bonus_struct(&bonus);
 	get_info_header(&env, &argv[0]);
@@ -315,8 +333,8 @@ int	main(int argc, char **argv)
 		re_init(&env);
 		free(line);
 	}
-	aff_map(&env, &bonus);
-	aff_percent_map(&bonus);
+	if (argc == 2)
+		arguments(argv, &bonus, &env);
 	tab_free(env.piece, env.size_map_y);
 	tab_free(env.map, env.size_map_y);
 }

@@ -28,6 +28,8 @@ SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c ./sources/algo.c\
 
 OBJS = $(SRCS:.c=.o)
 
+FMOD_DYLIB = ./fmod_lib/lib/libfmod.dylib
+
 NAME = rabougue.filler
 ##################################_RELINK_MODIFY_.h#############################
 RELINK_H = ./include/filler.h
@@ -39,6 +41,7 @@ $(NAME): $(OBJS)
 	@make -s -C ./libft/
 	@$(CC) $(FLAG) $(LFT) $(INCLUDE) $(OBJS) -o $(NAME)
 	@printf "✅  Compilation done.\n"
+	#@install_name_tool -change @rpath/libfmod.dylib $(FMOD_DYLIB) $(NAME)
 
 %.o : %.c $(RELINK_H) ./Makefile
 	@$(CC) -c $(FLAG) $< -o $@

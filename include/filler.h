@@ -14,7 +14,9 @@
 # define FILLER_H
 
 # include "../libft/includes/libft.h"
+#include "../fmod_lib/inc/fmod.h"
 #include <stdio.h>
+
 /*=============================================================================
 ** if a player == 1, the player is player one.
 ** if a player == 2, the player is player two.
@@ -67,6 +69,7 @@ typedef struct	s_fful
 	int			map_y;
 	int			me;
 	int			ennemi;
+	int			dist_right_and_first_o;
 }				t_fful;
 
 typedef struct	s_ffdr
@@ -108,7 +111,7 @@ void			who_is_x_or_o(t_env *env);
 ** bonus.c
 */
 void			init_bonus_struct(t_bonus *bonus);
-void			aff_percent_map(t_bonus *bonus);
+void			aff_percent_map(t_bonus *bonus, t_env *env);
 void			aff_map(t_env *env, t_bonus *bonus);
 
 void			fill_from_up_left(t_env *env);

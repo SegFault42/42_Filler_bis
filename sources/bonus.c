@@ -12,6 +12,20 @@
 
 #include "../include/filler.h"
 
+static void	calc_map(t_env *env, t_bonus *bonus)
+{
+	while (bonus->y++ < env->size_map_y -1 && (bonus->x = -1))
+		while (bonus->x++ < env->size_map_x -1)
+		{
+			if (env->map[bonus->y][bonus->x] == 'O' || env->map[bonus->y][bonus->x] == 'o')
+				++bonus->nb_o;
+			else if (env->map[bonus->y][bonus->x] == 'X' || env->map[bonus->y][bonus->x] == 'x')
+				++bonus->nb_x;
+			else
+				++bonus->nb_point;
+		}
+}
+
 void	init_bonus_struct(t_bonus *bonus)
 {
 	bonus->x = -1;
@@ -21,13 +35,15 @@ void	init_bonus_struct(t_bonus *bonus)
 	bonus->nb_point = 0;
 }
 
-void	aff_percent_map(t_bonus *bonus)
+void	aff_percent_map(t_bonus *bonus, t_env *env)
 {
 	double	total;
 	double	o;
 	double	x;
 	double	point;
 
+	init_bonus_struct(bonus);
+	calc_map(env, bonus);
 	total = bonus->nb_o + bonus->nb_x + bonus->nb_point;
 	o = total - bonus->nb_x - bonus->nb_point;
 	x = total - bonus->nb_o - bonus->nb_point;
