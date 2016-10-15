@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-seed = 6830
-=======
-seed = 7936
->>>>>>> 77787f54f8e7e4cc162a69bf691e44edbaf55d8a
+seed = 7771
+./rabougue.filler -pm won
+Score:
+241AGAINST105
