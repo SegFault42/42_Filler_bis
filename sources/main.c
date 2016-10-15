@@ -202,21 +202,21 @@ void	place_piece(t_env *env)
 		++substract_x;
 	}
 	//=========================================================================
-	while (y < env->size_piece_y)
-	{
-		x = 0;
-		while (x < env->size_piece_x)
-		{
+	/*while (y < env->size_piece_y)*/
+	/*{*/
+		/*x = 0;*/
+		/*while (x < env->size_piece_x)*/
+		/*{*/
 			/*if ((env->map[env->last_y][env->last_x] == 'o' ||
 			 * env->map[env->last_y][env->last_x] == 'O') && env->piece[y][x] == '*')*/
-				/*me++;*/
-			if (env->map[env->last_y][env->last_x + x] == 'x' ||
-			env->map[env->last_y + y][env->last_x + x] == 'X')
-				ennemi++;
-			++x;
-		}
-		++y;
-	}
+				/*[>me++;<]*/
+			/*if (env->map[env->last_y][env->last_x + x] == 'x' ||*/
+			/*env->map[env->last_y + y][env->last_x + x] == 'X')*/
+				/*ennemi++;*/
+			/*++x;*/
+		/*}*/
+		/*++y;*/
+	/*}*/
 	count_empty_line_form_up(env);
 	/*count_empty_point_form_left(env);*/
 	/*if (ft_strstr(env->map[env->size_map_y], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)*/

@@ -68,8 +68,11 @@ void	fill_from_up_left(t_env *env)
 		{
 			if (fful.me == 1 && fful.ennemi == 0)
 			{
+				/*len_piece_xy(env);*/
 				if (fful.map_y + (env->size_form_y - env->empty_line_form_up) <= env->size_map_y &&
-				fful.map_x + (env->size_form_x - env->empty_point_form_left) <= env->size_map_x)
+					fful.map_x + (env->size_form_x - env->empty_point_form_left) <= env->size_map_x)
+				/*if (fful.map_y + (env->size_piece_y) <= env->size_map_y &&*/
+				/*fful.map_x + (env->size_piece_x) <= env->size_map_x)*/
 				{
 					ft_fprintf(1, "%d %d\n", fful.map_y, fful.map_x);
 					return ;

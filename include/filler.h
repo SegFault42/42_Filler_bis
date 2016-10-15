@@ -117,5 +117,6 @@ void			fill_from_up_left(t_env *env);
 void			fill_from_down_right(t_env *env);
 void			count_empty_line_form_up(t_env *env);
 void			count_empty_point_form_left(t_env *env);
+void			len_piece_xy(t_env *env);
 
 #endif
