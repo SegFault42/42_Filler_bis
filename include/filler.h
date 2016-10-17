@@ -60,6 +60,7 @@ typedef struct	s_env
 	int			empty_point_form_right;
 //=============================================================================
 	char		player;
+	char		other;
 }				t_env;
 
 typedef struct	s_fful

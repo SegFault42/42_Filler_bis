@@ -63,27 +63,33 @@ static int	no_name(t_env *env, int substract_y, int substract_x)
 	return (EXIT_SUCCESS);
 }
 
-void	place_piece(t_env *env)
+void	substract_x_y(int *substract_x, int *substract_y, t_env *env)
 {
 	int	x;
 	int	y;
-	int	substract_y;
-	int	substract_x;
-
+	
 	x = 0;
 	y = 0;
-	substract_y = 0;
-	substract_x = 0;
 	while (ft_strstr(env->piece[y], "*") == NULL)
 	{
 		++y;
-		++substract_y;
+		++*substract_y;
 	}
 	while (env->piece[y][x] != '*')
 	{
 		++x;
-		++substract_x;
+		++*substract_x;
 	}
+}
+
+void	place_piece(t_env *env)
+{
+	int	substract_y;
+	int	substract_x;
+
+	substract_y = 0;
+	substract_x = 0;
+	substract_x_y(&substract_x, &substract_y, env);
 	count_empty_line_form_up(env);
 	count_empty_line_form_down(env);
 	env->size_form_y -= env->empty_line_form_down;

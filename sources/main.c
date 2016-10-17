@@ -30,7 +30,8 @@ int	check_who_is_higher(t_env *env)
 	i = 0;
 	while (i < env->size_map_y)
 	{
-		if (ft_strstr(env->map[i], "O") != NULL || ft_strstr(env->map[i], "o") != NULL)
+		if (ft_strstr(env->map[i], "O") != NULL ||
+			ft_strstr(env->map[i], "o") != NULL)
 		{
 			if (env->player == 'O')
 			{
@@ -69,13 +70,15 @@ void	where_is_the_lower(t_env *env)
 
 	while (y < env->size_map_y)
 	{
-		if (ft_strstr(env->map[y], "O") != NULL || ft_strstr(env->map[y], "o") != NULL)
+		if (ft_strstr(env->map[y], "O") != NULL ||
+			ft_strstr(env->map[y], "o") != NULL)
 			env->last_y = y;
 		++y;
 	}
 	while (x < env->size_map_x)
 	{
-		if (env->map[env->last_y][x] == 'o' || env->map[env->last_y][x] == 'O')
+		if (env->map[env->last_y][x] == 'o' ||
+			env->map[env->last_y][x] == 'O')
 			env->last_x = x;
 		++x;
 	}
@@ -116,9 +119,11 @@ void	split_map(t_env *env)
 		count_empty_line_form_up(env);
 		count_empty_line_form_down(env);
 		env->size_form_y -= env->empty_line_form_down;
-		/*[>uniquement pour carli<]*/
-		/*if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL &&*/
-		/*ft_strstr(env->map[0], "X") == NULL && ft_strstr(env->map[env->size_map_y -1], "X") == NULL)*/
+		/*[>[>uniquement pour carli<]<]*/
+		/*if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL &&*/
+			/*ft_strstr(env->map[0], "O") != NULL &&*/
+			/*ft_strstr(env->map[0], "X") == NULL &&*/
+			/*ft_strstr(env->map[env->size_map_y -1], "X") == NULL)*/
 			/*fill_from_up_left(env);*/
 		/*else*/
 			fill_from_down_right(env);

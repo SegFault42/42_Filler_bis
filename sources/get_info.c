@@ -112,14 +112,12 @@ void	get_info_header(t_env *env, char **argv)
 			if (ft_strstr(line, &argv[0][2]) != NULL)
 			{
 				env->player = 'O';
-				/*env->rabougue = 1;*/
-				/*env->ennemi = 2;*/
+				env->other = 'X';
 			}
 			else
 			{
 				env->player = 'X';
-				/*env->ennemi = 1;*/
-				/*env->rabougue = 2;*/
+				env->other = 'O';
 			}
 			free(line);
 			return ;

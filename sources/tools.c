@@ -48,6 +48,7 @@ void	init_filler_struct(t_env *env)
 	env->empty_line_form_down = 0;
 	env->empty_point_form_left = 0;
 	env->player = 0;
+	env->other = 0;
 }
 
 void	re_init(t_env *env)
