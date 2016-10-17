@@ -72,7 +72,7 @@ void	fill_from_up_left(t_env *env)
 				env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == env->player[0]) &&
 				env->piece[fful.piece_y][fful.piece_x] == '*')
 				fful.me++;
-			else if (env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == env->other[0] &&
+			else if (env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] != '.' &&
 			env->piece[fful.piece_y][fful.piece_x] == '*')
 				fful.ennemi++;
 			/*ft_putchar_fd(env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x], 2);*/

@@ -2,6 +2,8 @@
 Bonus :
 - Affichage des pourcentages √
 - Affichage de l'etat de la map final √
+- Gestion map a obstacle √
+- Gestion map multi start √
 - Representation graphique SDL
 - Gestion du son
 - Enregistrement de la partie complete dans un fichier.

@@ -51,10 +51,10 @@ void	aff_percent_map(t_bonus *bonus, t_env *env)
 	x = total - bonus->nb_o - bonus->nb_point;
 	point = total - bonus->nb_o - bonus->nb_x;
 	ft_putendl_fd(PINK"-------------------------------------", 2);
-	ft_putstr_fd(RED"Le joueur 1 a pris ", 2);
+	ft_putstr_fd(GREEN"Le joueur 1 a pris ", 2);
 	fprintf(stderr, "%.2f", o * 100 / total);
 	ft_putendl_fd("% de la map.", 2);
-	ft_putstr_fd(ORANGE"Le joueur 2 a pris ", 2);
+	ft_putstr_fd(PURPLE"Le joueur 2 a pris ", 2);
 	fprintf(stderr, "%.2f", x * 100 / total);
 	ft_putendl_fd("% de la map.", 2);
 	fprintf(stderr, GREY"%.2f", point * 100 / total);
@@ -70,13 +70,18 @@ void	aff_map(t_env *env, t_bonus *bonus)
 		{
 			if (env->map[bonus->y][bonus->x] == 'O' || env->map[bonus->y][bonus->x] == 'o')
 			{
+				ft_putstr_fd(BGREEN" ", 2);
 				++bonus->nb_o;
-				ft_putstr_fd(BRED" ", 2);
 			}
 			else if (env->map[bonus->y][bonus->x] == 'X' || env->map[bonus->y][bonus->x] == 'x')
 			{
 				++bonus->nb_x;
-				ft_putstr_fd(BORANGE" ", 2);
+				ft_putstr_fd(BPURPLE" ", 2);
+			}
+			else if (env->map[bonus->y][bonus->x] != '.')
+			{
+				++bonus->nb_point;
+				ft_putstr_fd(BWHITE" ", 2);
 			}
 			else
 			{

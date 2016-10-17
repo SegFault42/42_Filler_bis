@@ -99,8 +99,7 @@ int	check_if_ennemi(t_env *env)
 		x = 0;
 		while (x < env->size_form_x)
 		{
-			if (env->map[env->last_y + y][env->last_x + x] == ft_tolower(env->other[0]) ||
-				env->map[env->last_y + y][env->last_x + x] == env->other[0])
+			if (env->map[env->last_y + y][env->last_x + x] != '.')
 				return (EXIT_FAILURE);
 			++x;
 		}
@@ -108,7 +107,6 @@ int	check_if_ennemi(t_env *env)
 	}
 	return (EXIT_SUCCESS);
 }
-
 
 void	split_map(t_env *env)
 {
@@ -145,18 +143,8 @@ int	main(int argc, char **argv)
 	init_bonus_struct(&bonus);
 	get_info_header(&env, &argv[0]);
 	alloc_map(&env);
-	ft_fprintf(2, GREEN"%d\n"END, env.rabougue);
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
-		if (env.rabougue == 1 || env.rabougue == 5 || env.rabougue == 6)
-		{
-			/*while (ft_strstr(line, "<got (O)") == NULL)*/
-			/*{*/
-				/*ft_fprintf(2, RED"%s\n"END, line);*/
-				/*get_next_line(STDIN_FILENO, &line);*/
-			/*}*/
-		}
-		/*get_next_line(STDIN_FILENO, &line);*/
 		get_map(&env);
 		if (env.rabougue < 2)
 			check_who_is_higher(&env);

@@ -10,11 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-################################################################################
-#Additional lib : FMOD for sound
-#	brew install Caskroom/cask/fmod-studio
-################################################################################
-
 ####################################_COLOR_#####################################
 GREEN = \033[38;5;10m
 GREY = \033[38;5;60m
@@ -23,9 +18,9 @@ END = \033[0m
 CC = gcc
 FLAG =  #-Wall -Wextra -Werror -O3 # -g
 LFT = ./libft/libft.a
-SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c ./sources/algo.c\
+SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c\
 		./sources/bonus.c ./sources/count.c ./sources/place_piece.c \
-		./sources/fill_up_form_left.c
+		./sources/fill_up_form_left.c ./sources/fill_down_form_right.c\
 
 OBJS = $(SRCS:.c=.o)
 
