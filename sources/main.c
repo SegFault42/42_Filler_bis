@@ -116,7 +116,7 @@ void	split_map(t_env *env)
 		count_empty_line_form_up(env);
 		count_empty_line_form_down(env);
 		env->size_form_y -= env->empty_line_form_down;
-		/*uniquement pour carli*/
+		/*[>uniquement pour carli<]*/
 		/*if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL &&*/
 		/*ft_strstr(env->map[0], "X") == NULL && ft_strstr(env->map[env->size_map_y -1], "X") == NULL)*/
 			/*fill_from_up_left(env);*/

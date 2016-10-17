@@ -24,7 +24,8 @@ CC = gcc
 FLAG =  -Wall -Wextra -Werror -O3 # -g
 LFT = ./libft/libft.a
 SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c ./sources/algo.c\
-		./sources/bonus.c ./sources/count.c ./sources/place_piece.c
+		./sources/bonus.c ./sources/count.c ./sources/place_piece.c \
+		./sources/fill_up_form_left.c
 
 OBJS = $(SRCS:.c=.o)
 

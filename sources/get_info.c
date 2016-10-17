@@ -19,12 +19,10 @@ void	get_piece(t_env *env)
 
 	i = 0;
 	get_size_piece(env);
-	/*env->piece = (char **)malloc(sizeof(char *) * env->size_form_y);*/
 	while (i < env->size_form_y)
 	{
 		get_next_line(STDIN_FILENO, &line);
 		ft_memmove(env->piece[i], line, env->size_form_x);
-		/*env->piece[i] = ft_strdup(line);*/
 		++i;
 		free(line);
 	}
