@@ -1,4 +1,6 @@
-seed = 3851
+seed = 4264
+X: error on input
+O: error on input
 ./rabougue.filler -pm won
 Score:
-228AGAINST123
+99AGAINST98

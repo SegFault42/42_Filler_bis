@@ -14,8 +14,7 @@
 # define FILLER_H
 
 # include "../libft/includes/libft.h"
-#include <stdio.h>
-
+# include "../include/SDL2/SDL.h"
 /*=============================================================================
 ** if a player == 1, the player is player one.
 ** if a player == 2, the player is player two.
@@ -95,6 +94,17 @@ typedef struct	s_bonus
 	int			nb_x;
 	int			nb_point;
 }				t_bonus;
+
+typedef struct		s_win
+{
+	SDL_Window		*win;
+	SDL_Renderer	*render;
+	//SDL_Surface		*g_screen_surface;
+	//SDL_Surface		*icon;
+	//SDL_Rect		srcrect;
+	//SDL_Rect		dstrect;
+	int				loop;
+}					t_win;
 /*
 ** get_info.c
 */
@@ -128,7 +138,12 @@ void			count_empty_line_form_down(t_env *env);
 ** place_piece.c
 */
 void			place_piece(t_env *env);
-
+/*
+** window.c
+*/
+int				init_window(char *win_name, int width, int height, t_win *win);
+void			close_window(t_win *win);
+void			sdl_clear(t_win *win);
 
 void			fill_from_up_left(t_env *env);
 void			fill_from_down_right(t_env *env);
