@@ -5,7 +5,7 @@ static int	calc_dist_left_and_last_o(t_env *env, t_ffdr *ffdr)
 	int	x = ffdr->map_x;
 	int	y = ffdr->map_y;
 
-	while (env->map[y][x] != 'O')
+	while (env->map[y][x] != env->player[0])
 		--x;
 	return (x);
 }
@@ -28,7 +28,7 @@ static void	re_init_ffdr(t_env *env, t_ffdr *ffdr)
 	ffdr->piece_y = 0;
 	ffdr->piece_x = 0;
 	ffdr->map_x--;
-	if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL && ft_strstr(env->map[0], "O") != NULL)
+	if (ft_strstr(env->map[env->size_map_y - 1], env->player) != NULL && ft_strstr(env->map[0], env->player) != NULL)
 	{
 		if (ffdr->map_x + env->size_form_x < ffdr->dist_left_and_last_o)
 		{
@@ -89,11 +89,11 @@ void		fill_from_down_right(t_env *env)
 		ffdr.piece_x = 0;
 		while (ffdr.piece_x < env->size_form_x)
 		{
-			if ((env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == 'o' ||
-			env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == 'O') &&
+			if ((env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == env->player_min[0] ||
+			env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == env->player[0]) &&
 			env->piece[ffdr.piece_y][ffdr.piece_x] == '*')
 				ffdr.me++;
-			else if (env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == 'X' &&
+			else if (env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == env->other[0] &&
 			env->piece[ffdr.piece_y][ffdr.piece_x] == '*')
 				ffdr.ennemi++;
 			/*ft_putchar(env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x]);*/

@@ -68,11 +68,11 @@ void	fill_from_up_left(t_env *env)
 		fful.piece_x = 0;
 		while (fful.piece_x < env->size_form_x)
 		{
-			if ((env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == 'o' ||
-				env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == 'O') &&
+			if ((env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == env->player_min[0] ||
+				env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == env->player[0]) &&
 				env->piece[fful.piece_y][fful.piece_x] == '*')
 				fful.me++;
-			else if (env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == 'X' &&
+			else if (env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == env->other[0] &&
 			env->piece[fful.piece_y][fful.piece_x] == '*')
 				fful.ennemi++;
 			/*ft_putchar_fd(env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x], 2);*/

@@ -30,15 +30,15 @@ int	check_who_is_higher(t_env *env)
 	i = 0;
 	while (i < env->size_map_y)
 	{
-		if (ft_strstr(env->map[i], "O") != NULL ||
-			ft_strstr(env->map[i], "o") != NULL)
+		if (ft_strstr(env->map[i], env->player) != NULL ||
+			ft_strstr(env->map[i], env->player_min) != NULL)
 		{
-			if (env->player == 'O')
+			if (env->player[0] == 'O')
 			{
 				env->rabougue = 3;
 				env->ennemi = 6;
 			}
-			else if (env->player == 'X')
+			else if (env->player[0] == 'X')
 			{
 				env->rabougue = 6;
 				env->ennemi = 3;
@@ -47,12 +47,12 @@ int	check_who_is_higher(t_env *env)
 		}
 		else if (ft_strstr(env->map[i], "X") != NULL)
 		{
-			if (env->player == 'O')
+			if (env->player[0] == 'O')
 			{
 				env->rabougue = 4;
 				env->ennemi = 5;
 			}
-			else if (env->player == 'X')
+			else if (env->player[0] == 'X')
 			{
 				env->rabougue = 5;
 				env->ennemi = 4;
@@ -66,19 +66,22 @@ int	check_who_is_higher(t_env *env)
 
 void	where_is_the_lower(t_env *env)
 {
-	int x = 0, y = 0;
+	int	x;
+	int	y;
 
+	x = 0;
+	y = 0;
 	while (y < env->size_map_y)
 	{
-		if (ft_strstr(env->map[y], "O") != NULL ||
-			ft_strstr(env->map[y], "o") != NULL)
+		if (ft_strstr(env->map[y], env->player) != NULL ||
+			ft_strstr(env->map[y], env->player_min) != NULL)
 			env->last_y = y;
 		++y;
 	}
 	while (x < env->size_map_x)
 	{
-		if (env->map[env->last_y][x] == 'o' ||
-			env->map[env->last_y][x] == 'O')
+		if (env->map[env->last_y][x] == ft_tolower(env->player[0]) ||
+			env->map[env->last_y][x] == env->player[0])
 			env->last_x = x;
 		++x;
 	}
@@ -96,8 +99,8 @@ int	check_if_ennemi(t_env *env)
 		x = 0;
 		while (x < env->size_form_x)
 		{
-			if (env->map[env->last_y + y][env->last_x + x] == 'x' ||
-				env->map[env->last_y + y][env->last_x + x] == 'X')
+			if (env->map[env->last_y + y][env->last_x + x] == ft_tolower(env->other[0]) ||
+				env->map[env->last_y + y][env->last_x + x] == env->other[0])
 				return (EXIT_FAILURE);
 			++x;
 		}
@@ -113,8 +116,8 @@ void	split_map(t_env *env)
 	if (env->rabougue == 3)
 		place_piece(env);
 	else if (env->rabougue == 4 &&
-	ft_strstr(env->map[env->size_map_y - 1], "O") != NULL &&
-	ft_strstr(env->map[0], "O") != NULL)
+	ft_strstr(env->map[env->size_map_y - 1], env->player) != NULL &&
+	ft_strstr(env->map[0], env->player) != NULL)
 	{
 		count_empty_line_form_up(env);
 		count_empty_line_form_down(env);
@@ -132,7 +135,6 @@ void	split_map(t_env *env)
 		place_piece(env);
 }
 
-
 int	main(int argc, char **argv)
 {
 	t_env	env;
@@ -143,8 +145,18 @@ int	main(int argc, char **argv)
 	init_bonus_struct(&bonus);
 	get_info_header(&env, &argv[0]);
 	alloc_map(&env);
+	ft_fprintf(2, GREEN"%d\n"END, env.rabougue);
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
+		if (env.rabougue == 1 || env.rabougue == 5 || env.rabougue == 6)
+		{
+			/*while (ft_strstr(line, "<got (O)") == NULL)*/
+			/*{*/
+				/*ft_fprintf(2, RED"%s\n"END, line);*/
+				/*get_next_line(STDIN_FILENO, &line);*/
+			/*}*/
+		}
+		/*get_next_line(STDIN_FILENO, &line);*/
 		get_map(&env);
 		if (env.rabougue < 2)
 			check_who_is_higher(&env);
@@ -157,4 +169,6 @@ int	main(int argc, char **argv)
 		arguments(argv, &bonus, &env);
 	tab_free(env.piece, env.size_map_y);
 	tab_free(env.map, env.size_map_y);
+	free(env.player);
+	free(env.other);
 }

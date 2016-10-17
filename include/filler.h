@@ -59,8 +59,10 @@ typedef struct	s_env
 	int			empty_point_form_left;
 	int			empty_point_form_right;
 //=============================================================================
-	char		player;
-	char		other;
+	char		*player;
+	char		*other;
+	char		*player_min;
+	char		*other_min;
 }				t_env;
 
 typedef struct	s_fful

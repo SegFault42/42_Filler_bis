@@ -47,8 +47,10 @@ void	init_filler_struct(t_env *env)
 	env->empty_line_form_up = 0;
 	env->empty_line_form_down = 0;
 	env->empty_point_form_left = 0;
-	env->player = 0;
-	env->other = 0;
+	env->player = NULL;
+	env->other = NULL;
+	env->player_min = NULL;
+	env->other_min = NULL;
 }
 
 void	re_init(t_env *env)
@@ -77,10 +79,10 @@ void	tab_free(char **tab, int size)
 	free(tab);
 }
 
-void	who_is_x_or_o(t_env *env)
-{
-	if (env->rabougue == 1)
-		env->player = 'O';
-	else
-		env->player = 'X';
-}
+/*void	who_is_x_or_o(t_env *env)*/
+/*{*/
+	/*if (env->rabougue == 1)*/
+		/*env->player[0] = 'O';*/
+	/*else*/
+		/*env->player[0] = 'X';*/
+/*}*/

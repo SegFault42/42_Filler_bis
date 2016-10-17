@@ -111,13 +111,40 @@ void	get_info_header(t_env *env, char **argv)
 		{
 			if (ft_strstr(line, &argv[0][2]) != NULL)
 			{
-				env->player = 'O';
-				env->other = 'X';
+				env->rabougue = 0;
+				env->player = ft_strdup("O");
+				env->other = ft_strdup("X");
+				env->player_min = ft_strdup("o");
+				env->other_min = ft_strdup("x");
 			}
 			else
 			{
-				env->player = 'X';
-				env->other = 'O';
+				env->rabougue = 1;
+				env->player = ft_strdup("X");
+				env->other = ft_strdup("O");
+				env->player_min = ft_strdup("x");
+				env->other_min = ft_strdup("o");
+			}
+			free(line);
+			return ;
+		}
+		else if (ft_strstr(line, "$$$ exec p2") != NULL)
+		{
+			if (ft_strstr(line, &argv[0][2]) != NULL)
+			{
+				env->rabougue = 1;
+				env->player = ft_strdup("X");
+				env->other = ft_strdup("O");
+				env->player_min = ft_strdup("x");
+				env->other_min = ft_strdup("o");
+			}
+			else
+			{
+				env->rabougue = 0;
+				env->player = ft_strdup("O");
+				env->other = ft_strdup("X");
+				env->player_min = ft_strdup("o");
+				env->other_min = ft_strdup("x");
 			}
 			free(line);
 			return ;

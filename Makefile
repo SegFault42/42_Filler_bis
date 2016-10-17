@@ -21,7 +21,7 @@ GREY = \033[38;5;60m
 END = \033[0m
 ##################################_COMPILATION_#################################
 CC = gcc
-FLAG =  -Wall -Wextra -Werror -O3 # -g
+FLAG =  #-Wall -Wextra -Werror -O3 # -g
 LFT = ./libft/libft.a
 SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c ./sources/algo.c\
 		./sources/bonus.c ./sources/count.c ./sources/place_piece.c \

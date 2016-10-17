@@ -1,1 +1,5 @@
-seed = 9701
+seed = 2806
+O: error on input
+./rabougue.filler -pm won
+Score:
+35AGAINST35

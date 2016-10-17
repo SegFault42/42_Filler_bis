@@ -4,8 +4,8 @@ static int	close_up(t_env *env)
 {
 	//=========================================================================
 	//pour fermer au dessus en premier (map00 and map02 only)
-	if ((ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 15) ||
-		(ft_strstr(env->map[0], "O") == NULL && env->size_map_y == 100))
+	if ((ft_strstr(env->map[0], env->player) == NULL && env->size_map_y == 15) ||
+		(ft_strstr(env->map[0], env->player) == NULL && env->size_map_y == 100))
 	{
 		fill_from_up_left(env);
 		return (EXIT_SUCCESS);
@@ -18,8 +18,8 @@ static int	vertical_line_ok(t_env *env)
 {
 	//=========================================================================
 	//Une fois qu'un trait vertical est tracer
-	if (ft_strstr(env->map[env->size_map_y - 1], "O") != NULL &&
-		ft_strstr(env->map[0], "O") != NULL)
+	if (ft_strstr(env->map[env->size_map_y - 1], env->player) != NULL &&
+		ft_strstr(env->map[0], env->player) != NULL)
 	{
 		fill_from_down_right(env);
 		return (EXIT_SUCCESS);
@@ -32,11 +32,11 @@ static int	if_cross_ennemi(t_env *env)
 {
 	//=========================================================================
 	//pour fermer la map en bas si je percute l'adverssaire avant de fermer.
-	if ((ft_strstr(env->map[env->size_map_y - 1], "O") == NULL ||
-		ft_strstr(env->map[0], "O") == NULL) &&
+	if ((ft_strstr(env->map[env->size_map_y - 1], env->player) == NULL ||
+		ft_strstr(env->map[0], env->player) == NULL) &&
 		check_if_ennemi(env) == EXIT_FAILURE)
 	{
-		if (ft_strstr(env->map[env->size_map_y - 1], "O") == NULL)
+		if (ft_strstr(env->map[env->size_map_y - 1], env->player) == NULL)
 		{
 			fill_from_down_right(env);
 			return (EXIT_SUCCESS);
