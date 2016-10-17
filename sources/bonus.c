@@ -17,9 +17,11 @@ static void	calc_map(t_env *env, t_bonus *bonus)
 	while (bonus->y++ < env->size_map_y -1 && (bonus->x = -1))
 		while (bonus->x++ < env->size_map_x -1)
 		{
-			if (env->map[bonus->y][bonus->x] == 'O' || env->map[bonus->y][bonus->x] == 'o')
+			if (env->map[bonus->y][bonus->x] == 'O' ||
+			env->map[bonus->y][bonus->x] == 'o')
 				++bonus->nb_o;
-			else if (env->map[bonus->y][bonus->x] == 'X' || env->map[bonus->y][bonus->x] == 'x')
+			else if (env->map[bonus->y][bonus->x] == 'X' ||
+			env->map[bonus->y][bonus->x] == 'x')
 				++bonus->nb_x;
 			else
 				++bonus->nb_point;
@@ -56,7 +58,7 @@ void	aff_percent_map(t_bonus *bonus, t_env *env)
 	fprintf(stderr, "%.2f", x * 100 / total);
 	ft_putendl_fd("% de la map.", 2);
 	fprintf(stderr, GREY"%.2f", point * 100 / total);
-	ft_putendl_fd("% de la map n'a pas ete prise."END, 2);
+	ft_putendl_fd("% de la map n'a pas ete pris."END, 2);
 	ft_putendl_fd(PINK"-------------------------------------"END, 2);
 }
 
@@ -83,5 +85,16 @@ void	aff_map(t_env *env, t_bonus *bonus)
 			}
 		}
 		ft_putstr_fd(END"\n", 2);
+	}
+}
+
+void	arguments(char **argv, t_bonus *bonus, t_env *env)
+{
+	if (argv[1][0] == '-')
+	{
+		if (ft_strstr(argv[1], "m") != NULL)
+			aff_map(env, bonus);
+		if (ft_strstr(argv[1], "p") != NULL)
+			aff_percent_map(bonus, env);
 	}
 }

@@ -1,2 +1,24 @@
-map 00 : ok contre tout le monde en p1
-map 01 : ok contre tout le monde en p1
+###############################################################################
+Bonus :
+- Affichage des pourcentages √
+- Affichage de l'etat de la map final √
+- Representation graphique SDL
+- Gestion du son
+- Enregistrement de la partie complete dans un fichier.
+###############################################################################
+
+-----------------------------------------
+|     Player    | Map00 | Map01 | Map02 |
+-----------------------------------------
+|    Champely   |   √   |   √   |   √   |
+|    Abanlin    |   √   |   √    |  √   |
+|      Hcao     |   √   |   √   |       |
+|      Grati    |       |       |       |
+|      Carli    |       |       |       |
+| Super Jeannot |       |       |       |
+-----------------------------------------
+
+###############################################################################
+rabougue vs Champely Map02 : seed 7941
+supprimer les lignes vide en bas de la piece
+###############################################################################

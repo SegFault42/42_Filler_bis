@@ -55,7 +55,9 @@ typedef struct	s_env
 	int			last_y;
 //=============================================================================
 	int			empty_line_form_up;
+	int			empty_line_form_down;
 	int			empty_point_form_left;
+	int			empty_point_form_right;
 //=============================================================================
 	char		player;
 }				t_env;
@@ -112,11 +114,23 @@ void			who_is_x_or_o(t_env *env);
 void			init_bonus_struct(t_bonus *bonus);
 void			aff_percent_map(t_bonus *bonus, t_env *env);
 void			aff_map(t_env *env, t_bonus *bonus);
+void			arguments(char **argv, t_bonus *bonus, t_env *env);
+/*
+** count.c
+*/
+void			count_empty_line_form_up(t_env *env);
+void			count_empty_point_form_left(t_env *env);
+void			count_empty_line_form_down(t_env *env);
+/*
+** place_piece.c
+*/
+void			place_piece(t_env *env);
+
 
 void			fill_from_up_left(t_env *env);
 void			fill_from_down_right(t_env *env);
-void			count_empty_line_form_up(t_env *env);
-void			count_empty_point_form_left(t_env *env);
 void			len_piece_xy(t_env *env);
+int				check_if_ennemi(t_env *env);
+void			print_coord(int y, int x);
 
 #endif

@@ -39,7 +39,7 @@ OBJS = $(SRC:.c=.o)
 
 CC = clang
 
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -O3
 
 HEAD = ./includes/ ./ft_fprintf/includes/ft_fprintf.h
 
