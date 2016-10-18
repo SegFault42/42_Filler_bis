@@ -21,7 +21,7 @@ int		init_window(char *win_name, int width, int height, t_win *win)
 		return (EXIT_FAILURE);
 	}
 	win->win = SDL_CreateWindow(win_name, SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+			SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (win->win == NULL)
 	{
 		ft_putstr_fd("Could not create window : ", 2);

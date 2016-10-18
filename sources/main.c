@@ -144,7 +144,9 @@ void	init_and_info_header(t_env *env, t_bonus *bonus, char *argv)
 void	sdl_bonus(t_win *win, t_env *env)
 {
 	win->loop = 1;
-	init_window("Filler", env->size_map_x * 10, env->size_map_y * 10, win);
+	win->size_piece = 10;
+	init_window("Filler by Rabougue", env->size_map_x * win->size_piece,
+						  env->size_map_y * win->size_piece, win);
 }
 
 int	event()
@@ -155,7 +157,9 @@ int	event()
 	{
 		if (event.type == SDL_QUIT)
 			return (-1);
-		if (event.key.type == SDL_KEYDOWN)
+		if (event.key.keysym.sym == SDLK_ESCAPE)
+			return (-2);
+		if (event.key.type == SDL_KEYUP)
 			SDL_Delay(5000);
 	}
 	return (0);
@@ -179,15 +183,33 @@ void	draw_rect(SDL_Renderer *render, int width_x, int width_y, int pos_x, int po
 	}
 }
 
+void	draw_grille(t_env *env, t_win *win, int	map_x, int map_y)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	x = 0;
+	SDL_SetRenderDrawColor(win->render, 0, 0, 0, 255);
+	while (y < map_y)
+	{
+		SDL_RenderDrawLine(win->render, 0, y, map_x, y);
+		y += win->size_piece;
+	}
+	while (x < map_x)
+	{
+		SDL_RenderDrawLine(win->render, x, 0, x, map_y);
+		x += win->size_piece;
+	}
+}
+
 void	draw(t_win *win, t_env *env)
 {
 	int	x;
 	int	y;
-	int	size_piece;
 
-	size_piece = 10;
 	y = 0;
-	sdl_clear(win);
+	/*sdl_clear(win);*/
 	while (y < env->size_map_y)
 	{
 		x = 0;
@@ -196,22 +218,26 @@ void	draw(t_win *win, t_env *env)
 			if (env->map[y][x] == '.')
 			{
 				SDL_SetRenderDrawColor(win->render, 100, 100, 100, 255);
-				draw_rect(win->render, size_piece, size_piece, x * 10, y * 10);
+				draw_rect(win->render, win->size_piece, win->size_piece,
+								   x * win->size_piece, y * win->size_piece);
 			}
 			else if (env->map[y][x] == 'X' || env->map[y][x] == 'x')
 			{
 				SDL_SetRenderDrawColor(win->render, 255, 0, 0, 255);
-				draw_rect(win->render, size_piece, size_piece, x * 10, y * 10);
+				draw_rect(win->render, win->size_piece, win->size_piece,
+								   x * win->size_piece, y * win->size_piece);
 			}
 			else if (env->map[y][x] == 'O' || env->map[y][x] == 'o')
 			{
 				SDL_SetRenderDrawColor(win->render, 0, 255, 0, 255);
-				draw_rect(win->render, size_piece, size_piece, x * 10, y * 10);
+				draw_rect(win->render, win->size_piece, win->size_piece,
+								   x * win->size_piece, y * win->size_piece);
 			}
 			++x;
 		}
 		++y;
 	}
+	draw_grille(env, win, env->size_map_x * win->size_piece, env->size_map_y * win->size_piece);
 	SDL_RenderPresent(win->render);
 }
 
@@ -248,7 +274,7 @@ int	main(int argc, char **argv)
 		while (get_next_line(STDIN_FILENO, &line) > 0)
 		{
 			if (event() == -1)
-				break ;
+				exit(-1);
 			filler_loop(&env);
 			free(line);
 			draw(&win, &env);
@@ -257,5 +283,8 @@ int	main(int argc, char **argv)
 	}
 	if (argc == 2)
 		arguments(argv, &bonus, &env);
+	while(0xDEADBEEF)
+		if (event() == -2)
+			break ;
 	quit_filler(&env, &bonus, &win);
 }

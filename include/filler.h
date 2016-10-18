@@ -15,6 +15,7 @@
 
 # include "../libft/includes/libft.h"
 # include "../include/SDL2/SDL.h"
+# include "../include/SDL2/SDL_mixer.h"
 /*=============================================================================
 ** if a player == 1, the player is player one.
 ** if a player == 2, the player is player two.
@@ -103,6 +104,7 @@ typedef struct		s_win
 	//SDL_Surface		*icon;
 	//SDL_Rect		srcrect;
 	//SDL_Rect		dstrect;
+	int				size_piece;
 	int				loop;
 }					t_win;
 /*
