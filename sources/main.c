@@ -133,11 +133,105 @@ void	split_map(t_env *env)
 		place_piece(env);
 }
 
+void	init_and_info_header(t_env *env, t_bonus *bonus, char *argv)
+{
+	init_filler_struct(env);
+	init_bonus_struct(bonus);
+	get_info_header(env, &argv);
+	alloc_map(env);
+}
+
 void	sdl_bonus(t_win *win, t_env *env)
 {
 	win->loop = 1;
 	init_window("Filler", env->size_map_x * 10, env->size_map_y * 10, win);
-	/*win->g_screen_surface = SDL_GetWindowSurface(win->win);*/
+}
+
+int	event()
+{
+	SDL_Event	event;
+
+	if (SDL_PollEvent(&event))
+	{
+		if (event.type == SDL_QUIT)
+			return (-1);
+		if (event.key.type == SDL_KEYDOWN)
+			SDL_Delay(5000);
+	}
+	return (0);
+}
+
+void	draw_rect(SDL_Renderer *render, int width_x, int width_y, int pos_x, int pos_y)
+{
+	int x;
+	int y;
+
+	y = pos_y;
+	while (y < width_y + pos_y)
+	{
+		x = pos_x;
+		while (x < width_x + pos_x)
+		{
+			SDL_RenderDrawPoint(render, x, y);
+			++x;
+		}
+		++y;
+	}
+}
+
+void	draw(t_win *win, t_env *env)
+{
+	int	x;
+	int	y;
+	int	size_piece;
+
+	size_piece = 10;
+	y = 0;
+	sdl_clear(win);
+	while (y < env->size_map_y)
+	{
+		x = 0;
+		while (x < env->size_map_x)
+		{
+			if (env->map[y][x] == '.')
+			{
+				SDL_SetRenderDrawColor(win->render, 100, 100, 100, 255);
+				draw_rect(win->render, size_piece, size_piece, x * 10, y * 10);
+			}
+			else if (env->map[y][x] == 'X' || env->map[y][x] == 'x')
+			{
+				SDL_SetRenderDrawColor(win->render, 255, 0, 0, 255);
+				draw_rect(win->render, size_piece, size_piece, x * 10, y * 10);
+			}
+			else if (env->map[y][x] == 'O' || env->map[y][x] == 'o')
+			{
+				SDL_SetRenderDrawColor(win->render, 0, 255, 0, 255);
+				draw_rect(win->render, size_piece, size_piece, x * 10, y * 10);
+			}
+			++x;
+		}
+		++y;
+	}
+	SDL_RenderPresent(win->render);
+}
+
+void	filler_loop(t_env *env)
+{
+	get_map(env);
+	if (env->rabougue < 2)
+		check_who_is_higher(env);
+	get_piece(env);
+	split_map(env);
+	re_init(env);
+}
+
+void	quit_filler(t_env *env, t_bonus *bonus, t_win *win)
+{
+	close_window(win);
+	tab_free(env->piece, env->size_map_y);
+	tab_free(env->map, env->size_map_y);
+	free(env->player);
+	free(env->other);
 }
 
 int	main(int argc, char **argv)
@@ -145,50 +239,23 @@ int	main(int argc, char **argv)
 	t_env	env;
 	t_bonus	bonus;
 	t_win	win;
-	/*SDL_Event event;*/
 	char	*line;
-	SDL_Rect srcrect;
-	SDL_Rect dstrect;
 
-	srcrect.x = 0;
-	srcrect.y = 0;
-	srcrect.w = 32;
-	srcrect.h = 32;
-	dstrect.x = 640/2;
-	dstrect.y = 480/2;
-	dstrect.w = 32;
-	dstrect.h = 32;
-
-	init_filler_struct(&env);
-	init_bonus_struct(&bonus);
-	get_info_header(&env, &argv[0]);
-	alloc_map(&env);
+	init_and_info_header(&env, &bonus, argv[0]);
 	sdl_bonus(&win, &env);
 	while (win.loop)
 	{
 		while (get_next_line(STDIN_FILENO, &line) > 0)
 		{
-			/*if (event.type == SDL_QUIT)*/
-				/*win.loop = 0;*/
-			get_map(&env);
-			if (env.rabougue < 2)
-				check_who_is_higher(&env);
-			get_piece(&env);
-			split_map(&env);
-			re_init(&env);
+			if (event() == -1)
+				break ;
+			filler_loop(&env);
 			free(line);
-			sdl_clear(&win);
-			SDL_SetRenderDrawColor(win.render, 30, 153, 255, 255);
-			SDL_RenderFillRect(win.render, NULL);
-			SDL_RenderPresent(win.render);
+			draw(&win, &env);
 		}
 		win.loop = 0;
 	}
-	close_window(&win);
 	if (argc == 2)
 		arguments(argv, &bonus, &env);
-	tab_free(env.piece, env.size_map_y);
-	tab_free(env.map, env.size_map_y);
-	free(env.player);
-	free(env.other);
+	quit_filler(&env, &bonus, &win);
 }

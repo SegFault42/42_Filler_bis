@@ -36,7 +36,6 @@ void	sdl_clear(t_win *win)
 {
 	SDL_SetRenderDrawColor(win->render, 0, 0, 0, 0);
 	SDL_RenderClear(win->render);
-	/*SDL_RenderPresent(win->render);*/
 }
 
 void	close_window(t_win *win)
