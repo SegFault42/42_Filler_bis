@@ -5,9 +5,9 @@ Bonus :
 - Gestion map a obstacle √
 - Gestion map multi start √
 - Representation graphique SDL √
-	Ajouter la piece en cours
+	Ajouter la piece en cours √
 	Ajouter le gif du mec qui danse
-- Gestion du son
+- Gestion du son √
 - Enregistrement de la partie complete dans un fichier.
 ###############################################################################
 

@@ -151,14 +151,19 @@ void	filler_loop(t_env *env)
 	split_map(env);
 }
 
-void	quit_filler(t_env *env, t_bonus *bonus, t_win *win)
+void	quit_filler(t_env *env, t_bonus *bonus, t_win *win, char *argv)
 {
 	close_window(win);
+	TTF_CloseFont(win->police);
 	TTF_Quit();
+	if (ft_strstr(argv, "s") != NULL)
+		Mix_FreeMusic(win->music);
+	Mix_CloseAudio();
 	tab_free(env->piece, env->size_map_y);
 	tab_free(env->map, env->size_map_y);
 	free(env->player);
 	free(env->other);
+	exit(EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
@@ -171,12 +176,12 @@ int	main(int argc, char **argv)
 	int		y;
 
 	init_and_info_header(&env, &bonus, argv[0]);
-	sdl_init(&win, &env);
+	sdl_init(&win, &env, argv[1]);
 	while (win.loop)
 	{
 		while (get_next_line(STDIN_FILENO, &line) > 0)
 		{
-			if (event() == -1)
+			if (event(&env, &bonus, &win, argv[1]) == -1)
 				exit(-1);
 			filler_loop(&env);
 			free(line);
@@ -184,11 +189,12 @@ int	main(int argc, char **argv)
 			re_init(&env);
 		}
 		win.loop = 0;
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Filler by Rabougue", "Game finished.", win.win);
 	}
 	if (argc == 2)
 		arguments(argv, &bonus, &env);
 	while(0xDEADBEEF)
-		if (event() == -2)
+		if (event(&env, &bonus, &win, argv[1]) == -2)
 			break ;
-	quit_filler(&env, &bonus, &win);
+	quit_filler(&env, &bonus, &win, argv[1]);
 }

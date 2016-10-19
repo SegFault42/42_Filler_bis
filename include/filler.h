@@ -15,7 +15,8 @@
 
 # include "../libft/includes/libft.h"
 # include "../include/SDL2/SDL.h"
-# include "../include/SDL2/SDL_ttf.h"
+# include "../libsdl/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h"
+# include "../libsdl/SDL2_mixer.framework/Versions/A/Headers/SDL_mixer.h"
 /*=============================================================================
 ** if a player == 1, the player is player one.
 ** if a player == 2, the player is player two.
@@ -108,6 +109,10 @@ typedef struct		s_win
 	int				size_piece;
 	int				loop;
 	TTF_Font		*police;
+	SDL_Surface		*text;
+	SDL_Texture		*texture;
+	SDL_Rect		rect;
+	Mix_Music		*music;
 }					t_win;
 /*
 ** get_info.c
@@ -149,10 +154,12 @@ int				init_window(char *win_name, int width, int height, t_win *win);
 void			close_window(t_win *win);
 void			sdl_clear(t_win *win);
 /*
-** sdl_draw.c
+** sdl_draw_text.c
 */
-void			sdl_init(t_win *win, t_env *env);
-int				event();
+void			sdl_draw_text(t_win *win, t_env *env);
+
+void			sdl_init(t_win *win, t_env *env, char *argv);
+int				event(t_env *env, t_bonus *bonus, t_win *win, char *argv);
 void			draw(t_win *win, t_env *env);
 
 void			fill_from_up_left(t_env *env);
@@ -160,5 +167,6 @@ void			fill_from_down_right(t_env *env);
 void			len_piece_xy(t_env *env);
 int				check_if_ennemi(t_env *env);
 void			print_coord(int y, int x);
+void			quit_filler(t_env *env, t_bonus *bonus, t_win *win, char *argv);
 
 #endif
