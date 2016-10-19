@@ -20,8 +20,10 @@ int		init_window(char *win_name, int width, int height, t_win *win)
 		ft_putendl_fd("Failed to init SDL Video.", 2);
 		return (EXIT_FAILURE);
 	}
-	win->win = SDL_CreateWindow(win_name, SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	win->win = SDL_CreateWindow(win_name, 0, 0,
+				width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	win->win2 = SDL_CreateWindow(win_name, win->size_plateau + width, 0,
+				width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (win->win == NULL)
 	{
 		ft_putstr_fd("Could not create window : ", 2);
@@ -29,18 +31,23 @@ int		init_window(char *win_name, int width, int height, t_win *win)
 		exit(1);
 	}
 	win->render = SDL_CreateRenderer(win->win, -1, SDL_RENDERER_SOFTWARE);
+	win->render2 = SDL_CreateRenderer(win->win2, -1, SDL_RENDERER_SOFTWARE);
 	return (0);
 }
 
 void	sdl_clear(t_win *win)
 {
-	SDL_SetRenderDrawColor(win->render, 0, 0, 0, 0);
-	SDL_RenderClear(win->render);
+	/*SDL_SetRenderDrawColor(win->render, 0, 0, 0, 0);*/
+	SDL_SetRenderDrawColor(win->render2, 0, 0, 0, 0);
+	/*SDL_RenderClear(win->render);*/
+	SDL_RenderClear(win->render2);
 }
 
 void	close_window(t_win *win)
 {
 	SDL_DestroyRenderer(win->render);
+	SDL_DestroyRenderer(win->render2);
 	SDL_DestroyWindow(win->win);
+	SDL_DestroyWindow(win->win2);
 	SDL_Quit();
 }

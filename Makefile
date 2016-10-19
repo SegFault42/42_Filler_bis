@@ -27,7 +27,7 @@ LFT = ./libft/libft.a
 SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c\
 		./sources/bonus.c ./sources/count.c ./sources/place_piece.c \
 		./sources/fill_up_form_left.c ./sources/fill_down_form_right.c\
-		./sources/window.c ./sources/sdl_draw.c ./sources/sdl_draw_text.c
+		./sources/window.c ./sources/sdl_draw.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -154,11 +154,11 @@ void	filler_loop(t_env *env)
 void	quit_filler(t_env *env, t_bonus *bonus, t_win *win, char *argv)
 {
 	close_window(win);
-	TTF_CloseFont(win->police);
-	TTF_Quit();
 	if (ft_strstr(argv, "s") != NULL)
+	{
 		Mix_FreeMusic(win->music);
-	Mix_CloseAudio();
+		Mix_CloseAudio();
+	}
 	tab_free(env->piece, env->size_map_y);
 	tab_free(env->map, env->size_map_y);
 	free(env->player);

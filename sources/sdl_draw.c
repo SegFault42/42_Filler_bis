@@ -26,14 +26,17 @@ static void	draw_grille(t_env *env, t_win *win, int	map_x, int map_y)
 	y = 0;
 	x = 0;
 	SDL_SetRenderDrawColor(win->render, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(win->render2, 0, 0, 0, 255);
 	while (y < map_y)
 	{
 		SDL_RenderDrawLine(win->render, 0, y, map_x, y);
+		SDL_RenderDrawLine(win->render2, 0, y, map_x, y);
 		y += win->size_plateau;
 	}
 	while (x < map_x)
 	{
 		SDL_RenderDrawLine(win->render, x, 0, x, map_y);
+		SDL_RenderDrawLine(win->render2, x, 0, x, map_y);
 		x += win->size_plateau;
 	}
 }
@@ -47,9 +50,9 @@ void	sdl_init(t_win *win, t_env *env, char *argv)
 	else if (env->size_map_x >= 25 && env->size_map_x < 70)
 		win->size_plateau = 20;
 	else
-		win->size_plateau = 10;
+		win->size_plateau = 8;
 	win->size_piece = win->size_plateau;
-	init_window("Filler by Rabougue", (env->size_map_x * 2) * win->size_plateau,
+	init_window("Filler by Rabougue", env->size_map_x * win->size_plateau,
 						  env->size_map_y * win->size_plateau, win);
 	if (ft_strstr(argv, "s") != NULL)
 	{
@@ -58,8 +61,6 @@ void	sdl_init(t_win *win, t_env *env, char *argv)
 		win->music = Mix_LoadMUS("./media/sound/Music2.mp3");
 		Mix_PlayMusic(win->music, -1);
 	}
-	TTF_Init();
-	win->police = TTF_OpenFont("./media/fonts/no_more_lines.ttf", win->size_piece * 2);
 }
 
 int	event(t_env *env, t_bonus *bonus, t_win *win, char *argv)
@@ -92,22 +93,23 @@ static void	draw_piece(t_win *win, t_env *env)
 		x = 0;
 		while (x < env->size_form_x)
 		{
-			SDL_SetRenderDrawColor(win->render, 100, 100, 100, 255);
+			SDL_SetRenderDrawColor(win->render2, 100, 100, 100, 255);
 			if (env->piece[y][x] == '.')
-				draw_square(win->render, win->size_piece, win->size_piece,
-									(win->size_plateau * env->size_map_x) + (x * win->size_piece),
-									(y * win->size_piece + (win->size_plateau * 2)));
+				draw_square(win->render2, win->size_piece, win->size_piece,
+									(x * win->size_piece),
+									(y * win->size_piece));
 			else if (env->piece[y][x] == '*')
 			{
-				SDL_SetRenderDrawColor(win->render, 156, 100, 200, 255);
-				draw_square(win->render, win->size_piece, win->size_piece,
-									(win->size_plateau * env->size_map_x) + (x * win->size_piece),
-									(y * win->size_piece + (win->size_plateau * 2)));
+				SDL_SetRenderDrawColor(win->render2, 156, 100, 200, 255);
+				draw_square(win->render2, win->size_piece, win->size_piece,
+									(x * win->size_piece),
+									(y * win->size_piece));
 			}
 			++x;
 		}
 		++y;
 	}
+	/*SDL_SetWindowSize(win->win2, x * win->size_piece, y * win->size_piece);*/
 }
 
 void	draw(t_win *win, t_env *env)
@@ -145,7 +147,7 @@ void	draw(t_win *win, t_env *env)
 	draw_piece(win, env);
 	draw_grille(env, win, env->size_map_x * win->size_plateau, env->size_map_y * win->size_plateau);
 	draw_grille(env, win, (env->size_map_x * win->size_plateau) * 2, (env->size_map_y * win->size_plateau));
-	sdl_draw_text(win, env);
 	SDL_RenderPresent(win->render);
+	SDL_RenderPresent(win->render2);
 }
 

@@ -100,7 +100,9 @@ typedef struct	s_bonus
 typedef struct		s_win
 {
 	SDL_Window		*win;
+	SDL_Window		*win2;
 	SDL_Renderer	*render;
+	SDL_Renderer	*render2;
 	//SDL_Surface		*g_screen_surface;
 	//SDL_Surface		*icon;
 	//SDL_Rect		srcrect;
@@ -108,10 +110,6 @@ typedef struct		s_win
 	int				size_plateau;
 	int				size_piece;
 	int				loop;
-	TTF_Font		*police;
-	SDL_Surface		*text;
-	SDL_Texture		*texture;
-	SDL_Rect		rect;
 	Mix_Music		*music;
 }					t_win;
 /*
@@ -153,10 +151,6 @@ void			place_piece(t_env *env);
 int				init_window(char *win_name, int width, int height, t_win *win);
 void			close_window(t_win *win);
 void			sdl_clear(t_win *win);
-/*
-** sdl_draw_text.c
-*/
-void			sdl_draw_text(t_win *win, t_env *env);
 
 void			sdl_init(t_win *win, t_env *env, char *argv);
 int				event(t_env *env, t_bonus *bonus, t_win *win, char *argv);
