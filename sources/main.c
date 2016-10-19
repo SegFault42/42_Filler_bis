@@ -154,7 +154,7 @@ void	filler_loop(t_env *env)
 void	quit_filler(t_env *env, t_bonus *bonus, t_win *win, char *argv)
 {
 	close_window(win);
-	if (ft_strstr(argv, "s") != NULL)
+	if (argv != NULL && ft_strstr(argv, "s") != NULL)
 	{
 		Mix_FreeMusic(win->music);
 		Mix_CloseAudio();
@@ -176,13 +176,22 @@ int	main(int argc, char **argv)
 	int		y;
 
 	init_and_info_header(&env, &bonus, argv[0]);
-	sdl_init(&win, &env, argv[1]);
+	if (argc == 2)
+		sdl_init(&win, &env, argv[1]);
+	else if (argc == 1)
+		sdl_init(&win, &env, NULL);
 	while (win.loop)
 	{
 		while (get_next_line(STDIN_FILENO, &line) > 0)
 		{
-			if (event(&env, &bonus, &win, argv[1]) == -1)
-				exit(-1);
+			if (argc == 2)
+			{
+				if (event(&env, &bonus, &win, argv[1]) == -1)
+					exit(-1);
+			}
+			else if (argc == 1)
+				if (event(&env, &bonus, &win, NULL) == -1)
+					exit(-1);
 			filler_loop(&env);
 			free(line);
 			draw(&win, &env);
@@ -194,7 +203,18 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		arguments(argv, &bonus, &env);
 	while(0xDEADBEEF)
-		if (event(&env, &bonus, &win, argv[1]) == -2)
-			break ;
-	quit_filler(&env, &bonus, &win, argv[1]);
+	{
+		if (argc == 2)
+		{
+			if (event(&env, &bonus, &win, argv[1]) == -2)
+				break ;
+		}
+		else if (argc == 1)
+			if (event(&env, &bonus, &win, NULL) == -2)
+				break ;
+	}
+	if (argc == 2)
+		quit_filler(&env, &bonus, &win, argv[1]);
+	else if (argc == 1)
+		quit_filler(&env, &bonus, &win, NULL);
 }

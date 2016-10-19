@@ -12,7 +12,7 @@
 
 #include "../include/filler.h"
 
-int		init_window(char *win_name, int width, int height, t_win *win)
+int		init_window(int width, int height, t_win *win)
 {
 	win->loop = 1;
 	if (SDL_Init(SDL_INIT_VIDEO) == -1)
@@ -20,9 +20,9 @@ int		init_window(char *win_name, int width, int height, t_win *win)
 		ft_putendl_fd("Failed to init SDL Video.", 2);
 		return (EXIT_FAILURE);
 	}
-	win->win = SDL_CreateWindow(win_name, 0, 0,
+	win->win = SDL_CreateWindow("Filler by Rabougue (Plateau)", 0, 0,
 				width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-	win->win2 = SDL_CreateWindow(win_name, win->size_plateau + width, 0,
+	win->win2 = SDL_CreateWindow("Filler by Rabougue (Piece)", win->size_plateau + width, 0,
 				width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (win->win == NULL)
 	{

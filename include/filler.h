@@ -148,7 +148,7 @@ void			place_piece(t_env *env);
 /*
 ** window.c
 */
-int				init_window(char *win_name, int width, int height, t_win *win);
+int				init_window(int width, int height, t_win *win);
 void			close_window(t_win *win);
 void			sdl_clear(t_win *win);
 

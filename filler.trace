@@ -1,5 +1,4 @@
 seed = 1783
-O: error on input
-./resources/players/abanlin.filler won
+./rabougue.filler -pms won
 Score:
-549AGAINST1067
+85AGAINST81

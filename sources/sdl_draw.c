@@ -52,9 +52,9 @@ void	sdl_init(t_win *win, t_env *env, char *argv)
 	else
 		win->size_plateau = 8;
 	win->size_piece = win->size_plateau;
-	init_window("Filler by Rabougue", env->size_map_x * win->size_plateau,
+	init_window(env->size_map_x * win->size_plateau,
 						  env->size_map_y * win->size_plateau, win);
-	if (ft_strstr(argv, "s") != NULL)
+	if (argv != NULL && ft_strstr(argv, "s") != NULL)
 	{
 		SDL_Init(SDL_INIT_AUDIO);
 		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
