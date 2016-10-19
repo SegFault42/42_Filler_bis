@@ -111,6 +111,7 @@ typedef struct		s_win
 	int				size_piece;
 	int				loop;
 	Mix_Music		*music;
+	Mix_Chunk		*plop;
 }					t_win;
 /*
 ** get_info.c

@@ -60,6 +60,9 @@ void	sdl_init(t_win *win, t_env *env, char *argv)
 		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
 		win->music = Mix_LoadMUS("./media/sound/Music2.mp3");
 		Mix_PlayMusic(win->music, -1);
+		Mix_AllocateChannels(1);
+		Mix_Volume(1, MIX_MAX_VOLUME);
+		win->plop = Mix_LoadWAV("./media/sound/plop.wav");
 	}
 }
 

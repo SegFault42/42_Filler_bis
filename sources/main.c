@@ -157,6 +157,7 @@ void	quit_filler(t_env *env, t_bonus *bonus, t_win *win, char *argv)
 	if (argv != NULL && ft_strstr(argv, "s") != NULL)
 	{
 		Mix_FreeMusic(win->music);
+		Mix_FreeChunk(win->plop);
 		Mix_CloseAudio();
 	}
 	tab_free(env->piece, env->size_map_y);
@@ -186,6 +187,7 @@ int	main(int argc, char **argv)
 		{
 			if (argc == 2)
 			{
+				Mix_PlayChannel(-1, win.plop, 0);
 				if (event(&env, &bonus, &win, argv[1]) == -1)
 					exit(-1);
 			}
