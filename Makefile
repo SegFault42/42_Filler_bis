@@ -27,7 +27,7 @@ LFT = ./libft/libft.a
 SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c\
 		./sources/bonus.c ./sources/count.c ./sources/place_piece.c \
 		./sources/fill_up_form_left.c ./sources/fill_down_form_right.c\
-		./sources/window.c
+		./sources/window.c ./sources/sdl_draw.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -40,6 +40,7 @@ LSDL = -L ./libsdl/ -lSDL2
 FRAMEWORK = -framework OpenGL
 SDL2DYLIB = ./libsdl/libSDL2-2.0.0.dylib
 SDL2_image = ./libsdl/SDL2_image
+SDL2_ttf = ./libsdl/SDL2_ttf.framework/Versions/A/SDL2_ttf
 ################################################################################
 
 ###########################_RELINK_MODIFY_.h####################################
@@ -51,9 +52,12 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@printf "♻️ $(GREY) Compiling ...\n$(GREY)"
 	@make -s -C ./libft/
-	@$(CC) $(FLAG) $(LSDL) $(LFT) $(INCLUDE) $(OBJS) -o $(NAME) $(FRAMEWORK)
+	@$(CC) $(FLAG) $(LSDL) $(LFT) $(SDL2_ttf) $(INCLUDE) $(OBJS) -o $(NAME) $(FRAMEWORK)
 	@printf "✅  Compilation done.\n"
 	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDL2DYLIB) $(NAME)
+	@install_name_tool -change @rpath/SDL2_ttf.framework/Versions/A/SDL2_ttf $(SDL2_ttf) $(NAME)
+	@install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 $(SDL2DYLIB) $(SDL2_ttf)
+	#@install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 ./libsdl/SDL2.framework/Versions/A/SDL2 $(NAME)
 
 %.o : %.c $(RELINK_H) ./Makefile
 	@$(CC) -c $(FLAG) $< -o $@

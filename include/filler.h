@@ -15,6 +15,7 @@
 
 # include "../libft/includes/libft.h"
 # include "../include/SDL2/SDL.h"
+# include "../include/SDL2/SDL_ttf.h"
 /*=============================================================================
 ** if a player == 1, the player is player one.
 ** if a player == 2, the player is player two.
@@ -103,8 +104,10 @@ typedef struct		s_win
 	//SDL_Surface		*icon;
 	//SDL_Rect		srcrect;
 	//SDL_Rect		dstrect;
+	int				size_plateau;
 	int				size_piece;
 	int				loop;
+	TTF_Font		*police;
 }					t_win;
 /*
 ** get_info.c
@@ -145,6 +148,12 @@ void			place_piece(t_env *env);
 int				init_window(char *win_name, int width, int height, t_win *win);
 void			close_window(t_win *win);
 void			sdl_clear(t_win *win);
+/*
+** sdl_draw.c
+*/
+void			sdl_init(t_win *win, t_env *env);
+int				event();
+void			draw(t_win *win, t_env *env);
 
 void			fill_from_up_left(t_env *env);
 void			fill_from_down_right(t_env *env);
