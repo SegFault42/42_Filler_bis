@@ -40,7 +40,7 @@ static int	if_cross_ennemi(t_env *env)
 static int	no_name(t_env *env, int substract_y, int substract_x)
 {
 	if (((env->last_y + env->size_form_y) - env->empty_line_form_up) >
-	env->size_map_y || (env->last_x + env->size_form_x) > env->size_map_x )
+	env->size_map_y || (env->last_x + env->size_form_x) > env->size_map_x)
 	{
 		fill_from_up_left(env);
 		return (EXIT_SUCCESS);

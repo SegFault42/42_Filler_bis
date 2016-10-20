@@ -65,6 +65,10 @@ extern "C" {
 
 /* As of version 0.5, SDL is loaded dynamically into the application */
 
+//personal typef for 42 norme
+typedef SDL_Renderer	SDL_Rend;
+typedef unsigned char	uchar;
+
 /**
  *  \name SDL_INIT_*
  *

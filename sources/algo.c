@@ -1,5 +1,4 @@
 #include "../include/filler.h"
-
 /*=============================================================================
 ** Check who is higher and who is first player. See filler.h for more info.
 */
@@ -44,9 +43,8 @@ int			check_who_is_higher(t_env *env)
 			}
 			return (1);
 		}
-		else
-			if (check_who_is_higher_2(env, i) == 1)
-				return (1);
+		else if (check_who_is_higher_2(env, i) == 1)
+			return (1);
 	}
 	return (-1);
 }
@@ -76,9 +74,10 @@ void		where_is_the_lower(t_env *env)
 
 int			check_if_ennemi(t_env *env)
 {
-	int	x = 0;
-	int	y = 0;
+	int	x;
+	int	y;
 
+	y = 0;
 	if (env->last_y + env->size_form_y > env->size_map_y)
 		return (EXIT_FAILURE);
 	while (y < env->size_form_y)

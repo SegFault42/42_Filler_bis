@@ -40,9 +40,9 @@ int			event(t_env *env, t_win *win, t_bonus *bonus, char *argv)
 		if (event.key.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.sym == SDLK_MINUS)
-				bonus->volume -=10;
+				bonus->volume -= 10;
 			if (event.key.keysym.sym == SDLK_EQUALS)
-				bonus->volume +=10;
+				bonus->volume += 10;
 			if (event.key.keysym.sym == SDLK_p)
 				screenshot(env, win);
 		}

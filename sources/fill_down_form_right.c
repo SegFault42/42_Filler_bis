@@ -2,9 +2,11 @@
 
 static int	calc_dist_left_and_last_o(t_env *env, t_ffdr *ffdr)
 {
-	int	x = ffdr->map_x;
-	int	y = ffdr->map_y;
+	int	x;
+	int	y;
 
+	x = ffdr->map_x;
+	y = ffdr->map_y;
 	while (env->map[y][x] != env->player[0])
 		--x;
 	return (x);

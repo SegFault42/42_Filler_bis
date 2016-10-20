@@ -1,6 +1,4 @@
-seed = 9244
-O: error on input
-X: error on input
-./resources/players/hcao.filler won
+seed = 2436
+./rabougue.filler -sgraphic c won
 Score:
-166AGAINST292
+270AGAINST88

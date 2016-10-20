@@ -12,6 +12,14 @@
 
 #include "../include/filler.h"
 
+void	print_coord(int y, int x)
+{
+	ft_putnbr(y);
+	ft_putchar(' ');
+	ft_putnbr(x);
+	RC;
+}
+
 void	get_piece(t_env *env)
 {
 	char	*line;

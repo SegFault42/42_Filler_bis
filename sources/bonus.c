@@ -14,8 +14,8 @@
 
 static void	calc_map(t_env *env, t_bonus *bonus)
 {
-	while (bonus->y++ < env->size_map_y -1 && (bonus->x = -1))
-		while (bonus->x++ < env->size_map_x -1)
+	while (bonus->y++ < env->size_map_y - 1 && (bonus->x = - 1))
+		while (bonus->x++ < env->size_map_x - 1)
 		{
 			if (env->map[bonus->y][bonus->x] == 'O' ||
 			env->map[bonus->y][bonus->x] == 'o')
@@ -28,7 +28,7 @@ static void	calc_map(t_env *env, t_bonus *bonus)
 		}
 }
 
-void	aff_percent_map(t_bonus *bonus, t_env *env)
+void		aff_percent_map(t_bonus *bonus, t_env *env)
 {
 	double	total;
 	double	o;
@@ -55,12 +55,14 @@ void	aff_percent_map(t_bonus *bonus, t_env *env)
 
 static void	count_and_color_map(t_bonus *bonus, t_env *env)
 {
-	if (env->map[bonus->y][bonus->x] == 'O' || env->map[bonus->y][bonus->x] == 'o')
+	if (env->map[bonus->y][bonus->x] == 'O' ||
+		env->map[bonus->y][bonus->x] == 'o')
 	{
 		ft_putstr_fd(BGREEN" ", 2);
 		++bonus->nb_o;
 	}
-	else if (env->map[bonus->y][bonus->x] == 'X' || env->map[bonus->y][bonus->x] == 'x')
+	else if (env->map[bonus->y][bonus->x] == 'X' ||
+			env->map[bonus->y][bonus->x] == 'x')
 	{
 		++bonus->nb_x;
 		ft_putstr_fd(BPURPLE" ", 2);
@@ -77,17 +79,17 @@ static void	count_and_color_map(t_bonus *bonus, t_env *env)
 	}
 }
 
-void	aff_map(t_env *env, t_bonus *bonus)
+void		aff_map(t_env *env, t_bonus *bonus)
 {
-	while (bonus->y++ < env->size_map_y -1 && (bonus->x = -1))
+	while (bonus->y++ < env->size_map_y - 1 && (bonus->x = - 1))
 	{
-		while (bonus->x++ < env->size_map_x -1)
+		while (bonus->x++ < env->size_map_x - 1)
 			count_and_color_map(bonus, env);
 		ft_putstr_fd(END"\n", 2);
 	}
 }
 
-void	arguments(char **argv, t_bonus *bonus, t_env *env)
+void		arguments(char **argv, t_bonus *bonus, t_env *env)
 {
 	if (argv[1][0] == '-')
 	{

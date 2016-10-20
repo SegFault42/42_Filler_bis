@@ -2,8 +2,9 @@
 
 void	count_empty_line_form_up(t_env *env)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (ft_strstr(env->piece[i], "*") == NULL)
 		i++;
 	env->empty_line_form_up = i;
@@ -11,9 +12,11 @@ void	count_empty_line_form_up(t_env *env)
 
 void	count_empty_line_form_down(t_env *env)
 {
-	int	i = env->size_form_y -1;
-	int	j = 0;
+	int	i;
+	int	j;
 
+	i = env->size_form_y - 1;
+	j = 0;
 	while (ft_strstr(env->piece[i], "*") == NULL)
 	{
 		i--;
@@ -24,13 +27,16 @@ void	count_empty_line_form_down(t_env *env)
 
 void	count_empty_point_form_left(t_env *env)
 {
-	int	x = 0;
-	int	y = 0;
-	int	point = 0;
+	int	x;
+	int	y;
+	int	point;
 
+	y = 0;
+	point = 0;
 	env->empty_point_form_left = env->size_form_x;
 	while (y < env->size_form_y)
 	{
+		x = 0;
 		while (env->piece[y][x] == '.')
 		{
 			++point;
@@ -39,7 +45,6 @@ void	count_empty_point_form_left(t_env *env)
 		if (point < env->empty_point_form_left)
 			env->empty_point_form_left = point;
 		point = 0;
-		x = 0;
 		++y;
 	}
 }

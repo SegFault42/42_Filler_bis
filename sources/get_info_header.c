@@ -40,7 +40,7 @@ static void	parse_p2(char *line, char **argv, t_env *env)
 	}
 }
 
-void	get_info_header(t_env *env, char **argv)
+void		get_info_header(t_env *env, char **argv)
 {
 	char	*line;
 

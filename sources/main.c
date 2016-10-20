@@ -12,14 +12,6 @@
 
 #include "../include/filler.h"
 
-void	print_coord(int y, int x)
-{
-	ft_putnbr(y);
-	ft_putchar(' ');
-	ft_putnbr(x);
-	RC;
-}
-
 void	init_and_info_header(t_env *env, t_bonus *bonus, char *argv)
 {
 	init_filler_struct(env);
@@ -53,7 +45,7 @@ void	quit_filler(t_env *env, t_win *win, char *argv)
 	exit(EXIT_SUCCESS);
 }
 
-int	main_loop(t_win *win, t_env *env, t_bonus *bonus, char **argv)
+int		main_loop(t_win *win, t_env *env, t_bonus *bonus, char **argv)
 {
 	char	*line;
 
@@ -77,7 +69,7 @@ int	main_loop(t_win *win, t_env *env, t_bonus *bonus, char **argv)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_env	env;
 	t_bonus	bonus;
@@ -92,7 +84,7 @@ int	main(int argc, char **argv)
 		arguments(argv, &bonus, &env);
 	if (env.b_graphic == 1)
 	{
-		while(0xDEADBEEF)
+		while (0xDEADBEEF)
 			if (event(&env, &win, &bonus, argv[1]) == -2)
 				break ;
 	}

@@ -1,6 +1,6 @@
 #include "../include/filler.h"
 
-static void	re_init_fful(t_env * env, t_fful *fful)
+static void	re_init_fful(t_env *env, t_fful *fful)
 {
 	fful->me = 0;
 	fful->ennemi = 0;
@@ -49,7 +49,7 @@ static int	fill_from_up_left_2(t_env *env, t_fful *fful)
 	return (EXIT_FAILURE);
 }
 
-void	fill_from_up_left(t_env *env)
+void		fill_from_up_left(t_env *env)
 {
 	t_fful	fful;
 

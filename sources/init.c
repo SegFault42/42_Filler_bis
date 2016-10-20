@@ -13,7 +13,7 @@ void	init_bonus_struct(t_bonus *bonus)
 void	sdl_init(t_win *win, t_env *env, char *argv)
 {
 	win->loop = 1;
-	if (env->size_map_x < 25 )
+	if (env->size_map_x < 25)
 		win->size_plateau = 30;
 	else if (env->size_map_x >= 25 && env->size_map_x < 70)
 		win->size_plateau = 20;

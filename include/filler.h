@@ -30,8 +30,6 @@
 # define WIN_WIDTH env->size_map_x * win->size_plateau
 # define WIN_HEIGHT env->size_map_y * win->size_plateau
 
-typedef SDL_Renderer SDL_Rend;
-typedef unsigned char uchar;
 /*=============================================================================
 ** if a player == 1, the player is player one.
 ** if a player == 2, the player is player two.
@@ -121,11 +119,11 @@ typedef struct	s_win
 /*
 ** get_info.c
 */
-void			get_info_header(t_env *env, char **argv);
 void			get_size_map(t_env *env);
 void			get_map(t_env *env);
 void			get_piece(t_env *env);
 void			get_size_piece(t_env *env);
+void			print_coord(int y, int x);
 /*
 ** algo.c
 */
@@ -178,14 +176,11 @@ void			sdl_clear(t_win *win);
 ** keyboard.c
 */
 int				event(t_env *env, t_win *win, t_bonus *bonus, char *argv);
-
 void			draw(t_win *win, t_env *env);
-
 void			fill_from_up_left(t_env *env);
 void			fill_from_down_right(t_env *env);
 void			len_piece_xy(t_env *env);
 int				check_if_ennemi(t_env *env);
-void			print_coord(int y, int x);
 void			quit_filler(t_env *env, t_win *win, char *argv);
 
 #endif

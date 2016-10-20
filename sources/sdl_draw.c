@@ -1,11 +1,13 @@
 #include "../include/filler.h"
 
-static void	draw_square(SDL_Renderer *render, int width_x, int width_y, int pos_x, int pos_y)
+static void	draw_square(SDL_Renderer *render, int width_x, int pos_x, int pos_y)
 {
 	int	x;
 	int	y;
+	int	width_y;
 
 	y = pos_y;
+	width_y = width_x;
 	while (y < width_y + pos_y)
 	{
 		x = pos_x;
@@ -18,7 +20,7 @@ static void	draw_square(SDL_Renderer *render, int width_x, int width_y, int pos_
 	}
 }
 
-static void	draw_grille(t_win *win, int	map_x, int map_y)
+static void	draw_grille(t_win *win, int map_x, int map_y)
 {
 	int	y;
 	int	x;
@@ -41,7 +43,6 @@ static void	draw_grille(t_win *win, int	map_x, int map_y)
 	}
 }
 
-
 static void	draw_piece(t_win *win, t_env *env)
 {
 	int	x;
@@ -55,12 +56,12 @@ static void	draw_piece(t_win *win, t_env *env)
 		{
 			SDL_SetRenderDrawColor(win->render2, 100, 100, 100, 255);
 			if (env->piece[y][x] == '.')
-				draw_square(win->render2, win->size_piece, win->size_piece,
+				draw_square(win->render2, win->size_piece,
 							(x * win->size_piece), (y * win->size_piece));
 			else if (env->piece[y][x] == '*')
 			{
 				SDL_SetRenderDrawColor(win->render2, 0, 78, 255, 255);
-				draw_square(win->render2, win->size_piece, win->size_piece,
+				draw_square(win->render2, win->size_piece,
 							(x * win->size_piece), (y * win->size_piece));
 			}
 			++x;
@@ -75,18 +76,18 @@ static void	draw_plateau(t_env *env, t_win *win, int x, int y)
 	{
 		SDL_SetRenderDrawColor(win->render, 100, 100, 100, 255);
 		if (env->map[y][x] == '.')
-			draw_square(win->render, win->size_plateau, win->size_plateau,
+			draw_square(win->render, win->size_plateau,
 							x * win->size_plateau, y * win->size_plateau);
 		else if (env->map[y][x] == 'X' || env->map[y][x] == 'x')
 		{
 			SDL_SetRenderDrawColor(win->render, 255, 0, 0, 255);
-			draw_square(win->render, win->size_plateau, win->size_plateau,
+			draw_square(win->render, win->size_plateau,
 							x * win->size_plateau, y * win->size_plateau);
 		}
 		else if (env->map[y][x] == 'O' || env->map[y][x] == 'o')
 		{
 			SDL_SetRenderDrawColor(win->render, 0, 255, 0, 255);
-			draw_square(win->render, win->size_plateau, win->size_plateau,
+			draw_square(win->render, win->size_plateau,
 							x * win->size_plateau, y * win->size_plateau);
 		}
 		++x;
@@ -114,4 +115,3 @@ void		draw(t_win *win, t_env *env)
 	SDL_RenderPresent(win->render);
 	SDL_RenderPresent(win->render2);
 }
-
