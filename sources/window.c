@@ -20,10 +20,10 @@ int		init_window(int width, int height, t_win *win)
 		ft_putendl_fd("Failed to init SDL Video.", 2);
 		return (EXIT_FAILURE);
 	}
-	win->win = SDL_CreateWindow("Filler by Rabougue (Plateau)", 0, 0,
-				width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-	win->win2 = SDL_CreateWindow("Filler by Rabougue (Piece)", win->size_plateau + width, 0,
-				width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	win->win = SDL_CreateWindow("Filler by Rabougue (Plateau)", 100, 100,
+				width, height, SDL_WINDOW_BORDERLESS);
+	win->win2 = SDL_CreateWindow("Filler by Rabougue (Piece)", win->size_plateau
+				+ width + 100, 100, width, height, SDL_WINDOW_BORDERLESS);
 	if (win->win == NULL)
 	{
 		ft_putstr_fd("Could not create window : ", 2);
@@ -37,9 +37,7 @@ int		init_window(int width, int height, t_win *win)
 
 void	sdl_clear(t_win *win)
 {
-	/*SDL_SetRenderDrawColor(win->render, 0, 0, 0, 0);*/
 	SDL_SetRenderDrawColor(win->render2, 0, 0, 0, 0);
-	/*SDL_RenderClear(win->render);*/
 	SDL_RenderClear(win->render2);
 }
 

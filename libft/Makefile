@@ -10,6 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
+RED = \033[38;5;9m
+END = \033[0m
+
 PRE = ./ft_fprintf/sources/
 
 NAME = libft.a
@@ -51,6 +54,8 @@ $(NAME): $(OBJS) ./includes/libft.h
 	@ranlib $(NAME)
 
 %.o : %.c $(HEAD)
+	@printf "                                                               \r"
+	@printf "✅  $(notdir $<)\r"
 	$(CC) -c $(FLAG) $< -o $@
 
 mc: fclean all clean

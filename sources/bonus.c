@@ -28,15 +28,6 @@ static void	calc_map(t_env *env, t_bonus *bonus)
 		}
 }
 
-void	init_bonus_struct(t_bonus *bonus)
-{
-	bonus->x = -1;
-	bonus->y = -1;
-	bonus->nb_o = 0;
-	bonus->nb_x = 0;
-	bonus->nb_point = 0;
-}
-
 void	aff_percent_map(t_bonus *bonus, t_env *env)
 {
 	double	total;
@@ -62,33 +53,36 @@ void	aff_percent_map(t_bonus *bonus, t_env *env)
 	ft_putendl_fd(PINK"-------------------------------------"END, 2);
 }
 
+static void	count_and_color_map(t_bonus *bonus, t_env *env)
+{
+	if (env->map[bonus->y][bonus->x] == 'O' || env->map[bonus->y][bonus->x] == 'o')
+	{
+		ft_putstr_fd(BGREEN" ", 2);
+		++bonus->nb_o;
+	}
+	else if (env->map[bonus->y][bonus->x] == 'X' || env->map[bonus->y][bonus->x] == 'x')
+	{
+		++bonus->nb_x;
+		ft_putstr_fd(BPURPLE" ", 2);
+	}
+	else if (env->map[bonus->y][bonus->x] != '.')
+	{
+		++bonus->nb_point;
+		ft_putstr_fd(BWHITE" ", 2);
+	}
+	else
+	{
+		++bonus->nb_point;
+		ft_putstr_fd(BGREY" ", 2);
+	}
+}
+
 void	aff_map(t_env *env, t_bonus *bonus)
 {
 	while (bonus->y++ < env->size_map_y -1 && (bonus->x = -1))
 	{
 		while (bonus->x++ < env->size_map_x -1)
-		{
-			if (env->map[bonus->y][bonus->x] == 'O' || env->map[bonus->y][bonus->x] == 'o')
-			{
-				ft_putstr_fd(BGREEN" ", 2);
-				++bonus->nb_o;
-			}
-			else if (env->map[bonus->y][bonus->x] == 'X' || env->map[bonus->y][bonus->x] == 'x')
-			{
-				++bonus->nb_x;
-				ft_putstr_fd(BPURPLE" ", 2);
-			}
-			else if (env->map[bonus->y][bonus->x] != '.')
-			{
-				++bonus->nb_point;
-				ft_putstr_fd(BWHITE" ", 2);
-			}
-			else
-			{
-				++bonus->nb_point;
-				ft_putstr_fd(BGREY" ", 2);
-			}
-		}
+			count_and_color_map(bonus, env);
 		ft_putstr_fd(END"\n", 2);
 	}
 }

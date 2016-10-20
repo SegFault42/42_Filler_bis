@@ -79,10 +79,21 @@ void	tab_free(char **tab, int size)
 	free(tab);
 }
 
-/*void	who_is_x_or_o(t_env *env)*/
-/*{*/
-	/*if (env->rabougue == 1)*/
-		/*env->player[0] = 'O';*/
-	/*else*/
-		/*env->player[0] = 'X';*/
-/*}*/
+void	substract_x_y(int *substract_x, int *substract_y, t_env *env)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (ft_strstr(env->piece[y], "*") == NULL)
+	{
+		++y;
+		++*substract_y;
+	}
+	while (env->piece[y][x] != '*')
+	{
+		++x;
+		++*substract_x;
+	}
+}

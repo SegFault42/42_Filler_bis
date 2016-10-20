@@ -28,7 +28,8 @@ static void	re_init_ffdr(t_env *env, t_ffdr *ffdr)
 	ffdr->piece_y = 0;
 	ffdr->piece_x = 0;
 	ffdr->map_x--;
-	if (ft_strstr(env->map[env->size_map_y - 1], env->player) != NULL && ft_strstr(env->map[0], env->player) != NULL)
+	if (ft_strstr(env->map[env->size_map_y - 1], env->player) != NULL &&
+		ft_strstr(env->map[0], env->player) != NULL)
 	{
 		if (ffdr->map_x + env->size_form_x < ffdr->dist_left_and_last_o)
 		{
@@ -53,8 +54,9 @@ static int	fill_from_down_righ_2(t_env *env, t_ffdr *ffdr)
 	{
 		if (ffdr->me == 1 && ffdr->ennemi == 0)
 		{
-			if (ffdr->map_y + (env->size_form_y - env->empty_line_form_up) <= env->size_map_y &&
-			ffdr->map_x + (env->size_form_x - env->empty_point_form_left) <= env->size_map_x)
+			if (ffdr->map_y + (env->size_form_y - env->empty_line_form_up) <=
+			env->size_map_y && ffdr->map_x +
+			(env->size_form_x - env->empty_point_form_left) <= env->size_map_x)
 			{
 				if (ffdr->map_x < 0)
 					fill_from_up_left(env);
@@ -89,17 +91,15 @@ void		fill_from_down_right(t_env *env)
 		ffdr.piece_x = 0;
 		while (ffdr.piece_x < env->size_form_x)
 		{
-			if ((env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == env->player_min[0] ||
-			env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] == env->player[0]) &&
-			env->piece[ffdr.piece_y][ffdr.piece_x] == '*')
+			if ((env->map[DRPY + DRMY][DRPX + DRMX] == env->player_min[0] ||
+			env->map[DRPY + DRMY][DRPX + DRMX] == env->player[0]) &&
+			env->piece[DRPY][DRPX] == '*')
 				ffdr.me++;
-			else if (env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x] != '.' &&
-			env->piece[ffdr.piece_y][ffdr.piece_x] == '*')
+			else if (env->map[DRPY + DRMY][DRPX + DRMX] != '.' &&
+			env->piece[DRPY][DRPX] == '*')
 				ffdr.ennemi++;
-			/*ft_putchar(env->map[ffdr.piece_y + ffdr.map_y][ffdr.piece_x + ffdr.map_x]);*/
 			++ffdr.piece_x;
 		}
-		/*ft_putchar('\n');*/
 		if (fill_from_down_righ_2(env, &ffdr) == EXIT_SUCCESS)
 			return ;
 	}

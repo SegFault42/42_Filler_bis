@@ -18,16 +18,18 @@
 ####################################_COLOR_#####################################
 GREEN = \033[38;5;10m
 GREY = \033[38;5;60m
+RED = \033[38;5;9m
 END = \033[0m
 ##################################_COMPILATION_#################################
 NAME = rabougue.filler
 CC = gcc
-FLAG =  #-Wall -Wextra -Werror -O3 # -g
+FLAG = -Wall #-Wextra -Werror -O3 # -g
 LFT = ./libft/libft.a
 SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c\
 		./sources/bonus.c ./sources/count.c ./sources/place_piece.c \
 		./sources/fill_up_form_left.c ./sources/fill_down_form_right.c\
-		./sources/window.c ./sources/sdl_draw.c
+		./sources/window.c ./sources/sdl_draw.c ./sources/algo.c ./sources/init.c\
+		./sources/get_info_header.c ./sources/keyboard.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -52,7 +54,6 @@ RELINK_H = ./include/filler.h
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@printf "♻️ $(GREY) Compiling ...\n$(GREY)"
 	@make -s -C ./libft/
 	@$(CC) $(FLAG) $(LSDL) $(LFT) $(SDL2_ttf) $(SDL2_mixer) $(INCLUDE) $(OBJS) -o $(NAME) $(FRAMEWORK)
 	@printf "✅  Compilation done.\n"
@@ -61,18 +62,21 @@ $(NAME): $(OBJS)
 	@install_name_tool -change @rpath/SDL2_mixer.framework/Versions/A/SDL2_mixer $(SDL2_mixer) $(NAME)
 	@install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 $(SDL2DYLIB) $(SDL2_ttf)
 	@install_name_tool -change @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(SDL2DYLIB) $(SDL2_smpeg2)
-	#@install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 ./libsdl/SDL2.framework/Versions/A/SDL2 $(NAME)
 
 %.o : %.c $(RELINK_H) ./Makefile
+	@printf "                                                               \r"
+	@printf "✅  $(notdir $<)\r"
 	@$(CC) -c $(FLAG) $< -o $@
 
 clean:
-	@printf "✅  $(GREY)all .o deleted\n"
+	@printf "                                                               \r"
+	@printf "✅  all .o deleted\r"
 	@rm -f $(OBJS)
 	@make -s clean -C ./libft/
 
 fclean:
-	@printf "✅  $(GREY)libft.a, all .o and rabougue.filler deleted\n$(END)"
+	@printf "                                                               \r"
+	@printf "✅  libft.a, all .o and rabougue.filler deleted\r"
 	@rm -f $(NAME) $(CHECKER) $(OBJS) $(OBJS_CHECKER)
 	@make -s fclean -C ./libft/
 

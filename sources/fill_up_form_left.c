@@ -14,7 +14,7 @@ static void	re_init_fful(t_env * env, t_fful *fful)
 	}
 }
 
-static void	init_fful(t_fful *fful, t_env *env)
+static void	init_fful(t_fful *fful)
 {
 	fful->piece_x = 0;
 	fful->piece_y = 0;
@@ -22,8 +22,6 @@ static void	init_fful(t_fful *fful, t_env *env)
 	fful->ennemi = 0;
 	fful->map_x = 0;
 	fful->map_y = 0;
-	/*fful->dist_right_and_first_o = calc_dist_right_and_first_o(env, fful);*/
-	(void)env;
 }
 
 static int	fill_from_up_left_2(t_env *env, t_fful *fful)
@@ -33,8 +31,6 @@ static int	fill_from_up_left_2(t_env *env, t_fful *fful)
 	{
 		if (fful->me == 1 && fful->ennemi == 0)
 		{
-			/*if (fful.map_y + ((env->size_form_y - env->empty_line_form_up)) <= env->size_map_y &&*/
-				/*fful.map_x + (env->size_form_x - env->empty_point_form_left) <= env->size_map_x)*/
 			if (fful->map_y + (env->size_piece_y) <= env->size_map_y &&
 			fful->map_x + (env->size_piece_x) <= env->size_map_x)
 			{
@@ -57,7 +53,7 @@ void	fill_from_up_left(t_env *env)
 {
 	t_fful	fful;
 
-	init_fful(&fful, env);
+	init_fful(&fful);
 	while (fful.piece_y < env->size_form_y)
 	{
 		if (fful.map_y > env->size_map_y - env->size_form_y)
@@ -68,17 +64,15 @@ void	fill_from_up_left(t_env *env)
 		fful.piece_x = 0;
 		while (fful.piece_x < env->size_form_x)
 		{
-			if ((env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == env->player_min[0] ||
-				env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] == env->player[0]) &&
-				env->piece[fful.piece_y][fful.piece_x] == '*')
+			if ((env->map[ULPY + ULMY][ULPX + ULMX] == env->player_min[0] ||
+				env->map[ULPY + ULMY][ULPX + ULMX] == env->player[0]) &&
+				env->piece[ULPY][ULPX] == '*')
 				fful.me++;
-			else if (env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x] != '.' &&
-			env->piece[fful.piece_y][fful.piece_x] == '*')
+			else if (env->map[ULPY + ULMY][ULPX + ULMX] != '.' &&
+			env->piece[ULPY][ULPX] == '*')
 				fful.ennemi++;
-			/*ft_putchar_fd(env->map[fful.piece_y + fful.map_y][fful.piece_x + fful.map_x], 2);*/
 			++fful.piece_x;
 		}
-		/*ft_putchar_fd('\n', 2);*/
 		if (fill_from_up_left_2(env, &fful) == EXIT_SUCCESS)
 			return ;
 	}
