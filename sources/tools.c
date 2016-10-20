@@ -51,6 +51,8 @@ void	init_filler_struct(t_env *env)
 	env->other = NULL;
 	env->player_min = NULL;
 	env->other_min = NULL;
+	env->b_graphic = 0;
+	env->b_sound = 0;
 }
 
 void	re_init(t_env *env)

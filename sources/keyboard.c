@@ -18,10 +18,21 @@ static void	key1(SDL_Event *event, t_env *env, t_win *win, char *argv)
 	}
 }
 
-int			event(t_env *env, t_win *win, char *argv)
+static void	screenshot(t_env *env, t_win *win)
 {
-	SDL_Event				event;
-	static unsigned char	volume = 128;
+	SDL_Surface	*p_screen;
+
+	p_screen = SDL_CreateRGBSurface(0, WIN_WIDTH, WIN_HEIGHT,
+									32, 0, 0, 0, 0);
+	SDL_RenderReadPixels(win->render, NULL, SDL_PIXELFORMAT_ARGB8888
+						, p_screen->pixels, p_screen->pitch);
+	SDL_SaveBMP(p_screen, "Screenshot.bmp");
+	SDL_FreeSurface(p_screen);
+}
+
+int			event(t_env *env, t_win *win, t_bonus *bonus, char *argv)
+{
+	SDL_Event	event;
 
 	if (SDL_PollEvent(&event))
 	{
@@ -29,15 +40,17 @@ int			event(t_env *env, t_win *win, char *argv)
 		if (event.key.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.sym == SDLK_MINUS)
-				volume -=10;
+				bonus->volume -=10;
 			if (event.key.keysym.sym == SDLK_EQUALS)
-				volume +=10;
+				bonus->volume +=10;
+			if (event.key.keysym.sym == SDLK_p)
+				screenshot(env, win);
 		}
 	}
-	if (volume >= 128)
-		volume = 128;
-	else if (volume <= 12)
-		volume = 12;
-	Mix_VolumeMusic(volume);
+	if (bonus->volume >= 128)
+		bonus->volume = 128;
+	else if (bonus->volume <= 12)
+		bonus->volume = 12;
+	Mix_VolumeMusic(bonus->volume);
 	return (0);
 }

@@ -27,8 +27,11 @@
 # define ULPX fful.piece_x
 # define ULMY fful.map_y
 # define ULMX fful.map_x
+# define WIN_WIDTH env->size_map_x * win->size_plateau
+# define WIN_HEIGHT env->size_map_y * win->size_plateau
 
 typedef SDL_Renderer SDL_Rend;
+typedef unsigned char uchar;
 /*=============================================================================
 ** if a player == 1, the player is player one.
 ** if a player == 2, the player is player two.
@@ -67,6 +70,8 @@ typedef struct	s_env
 	char		*other;
 	char		*player_min;
 	char		*other_min;
+	int			b_graphic;
+	int			b_sound;
 }				t_env;
 
 typedef struct	s_fful
@@ -98,6 +103,8 @@ typedef struct	s_bonus
 	int			nb_o;
 	int			nb_x;
 	int			nb_point;
+	int			graphic;
+	uchar		volume;
 }				t_bonus;
 
 typedef struct	s_win
@@ -146,6 +153,7 @@ void			arguments(char **argv, t_bonus *bonus, t_env *env);
 */
 void			init_bonus_struct(t_bonus *bonus);
 void			sdl_init(t_win *win, t_env *env, char *argv);
+void			init_bonus_arg(t_env *env, char **argv);
 /*
 ** get_info_header.c
 */
@@ -169,7 +177,7 @@ void			sdl_clear(t_win *win);
 /*
 ** keyboard.c
 */
-int				event(t_env *env, t_win *win, char *argv);
+int				event(t_env *env, t_win *win, t_bonus *bonus, char *argv);
 
 void			draw(t_win *win, t_env *env);
 

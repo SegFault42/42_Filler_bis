@@ -76,18 +76,18 @@ static void	draw_plateau(t_env *env, t_win *win, int x, int y)
 		SDL_SetRenderDrawColor(win->render, 100, 100, 100, 255);
 		if (env->map[y][x] == '.')
 			draw_square(win->render, win->size_plateau, win->size_plateau,
-						x * win->size_plateau, y * win->size_plateau);
+							x * win->size_plateau, y * win->size_plateau);
 		else if (env->map[y][x] == 'X' || env->map[y][x] == 'x')
 		{
 			SDL_SetRenderDrawColor(win->render, 255, 0, 0, 255);
 			draw_square(win->render, win->size_plateau, win->size_plateau,
-						x * win->size_plateau, y * win->size_plateau);
+							x * win->size_plateau, y * win->size_plateau);
 		}
 		else if (env->map[y][x] == 'O' || env->map[y][x] == 'o')
 		{
 			SDL_SetRenderDrawColor(win->render, 0, 255, 0, 255);
 			draw_square(win->render, win->size_plateau, win->size_plateau,
-						x * win->size_plateau, y * win->size_plateau);
+							x * win->size_plateau, y * win->size_plateau);
 		}
 		++x;
 	}

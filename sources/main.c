@@ -39,8 +39,9 @@ void	filler_loop(t_env *env)
 
 void	quit_filler(t_env *env, t_win *win, char *argv)
 {
-	close_window(win);
-	if (argv != NULL && ft_strstr(argv, "s") != NULL)
+	if (env->b_graphic == 1)
+		close_window(win);
+	if (env->b_sound == 1)
 	{
 		Mix_FreeMusic(win->music);
 		Mix_CloseAudio();
@@ -52,35 +53,48 @@ void	quit_filler(t_env *env, t_win *win, char *argv)
 	exit(EXIT_SUCCESS);
 }
 
+int	main_loop(t_win *win, t_env *env, t_bonus *bonus, char **argv)
+{
+	char	*line;
+
+	while (win->loop)
+	{
+		while (get_next_line(STDIN_FILENO, &line) > 0)
+		{
+			if (env->b_graphic == 1)
+				event(env, win, bonus, argv[1]);
+			filler_loop(env);
+			free(line);
+			if (env->b_graphic == 1)
+				draw(win, env);
+			re_init(env);
+		}
+		win->loop = 0;
+		if (env->b_graphic == 1)
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,
+			"Filler by Rabougue", "Game finished.", win->win);
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_env	env;
 	t_bonus	bonus;
 	t_win	win;
-	char	*line;
 
-	if (argc > 2)
-		exit(-1);
 	init_and_info_header(&env, &bonus, argv[0]);
-	sdl_init(&win, &env, argv[1]);
-	while (win.loop)
-	{
-		while (get_next_line(STDIN_FILENO, &line) > 0)
-		{
-			if (event(&env, &win, argv[1]) == -1)
-				exit(-1);
-			filler_loop(&env);
-			free(line);
-			draw(&win, &env);
-			re_init(&env);
-		}
-		win.loop = 0;
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Filler by Rabougue", "Game finished.", win.win);
-	}
+	init_bonus_arg(&env, argv);
+	if (env.b_graphic == 1)
+		sdl_init(&win, &env, argv[1]);
+	main_loop(&win, &env, &bonus, argv);
 	if (argc == 2)
 		arguments(argv, &bonus, &env);
-	while(0xDEADBEEF)
-		if (event(&env, &win, argv[1]) == -2)
-			break ;
+	if (env.b_graphic == 1)
+	{
+		while(0xDEADBEEF)
+			if (event(&env, &win, &bonus, argv[1]) == -2)
+				break ;
+	}
 	quit_filler(&env, &win, argv[1]);
 }
