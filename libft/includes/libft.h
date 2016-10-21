@@ -20,21 +20,10 @@
 # include "../ft_fprintf/includes/ft_fprintf.h"
 # include "./colors.h"
 
-/*
-**=============================================================================
-** Define for get_next_line function
-*/
 # define BUFF_SIZE 10
-/*
-**=============================================================================
-*/
-
 # define TRUE 1
 # define FALSE 0
 # define RC ft_putchar('\n');
-
-typedef unsigned int	uint;
-typedef unsigned long	ulong;
 
 typedef struct		s_list
 {

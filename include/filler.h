@@ -30,7 +30,8 @@
 # define WIN_WIDTH env->size_map_x * win->size_plateau
 # define WIN_HEIGHT env->size_map_y * win->size_plateau
 
-/*=============================================================================
+/*
+** =============================================================================
 ** if a player == 1, the player is player one.
 ** if a player == 2, the player is player two.
 ** if a player == 3, the player is player one and he is higher in the map.
@@ -38,7 +39,6 @@
 ** if a player == 5, the player is player two and he is higher in the map.
 ** if a player == 6, the player is player two and he is lower in the map.
 ** ============================================================================
-**
 ** ============================================================================
 ** form = carre entier (donner par la vm)
 ** piece = uniquement la piece dessiner par les etoiles
@@ -151,7 +151,7 @@ void			arguments(char **argv, t_bonus *bonus, t_env *env);
 ** init.c
 */
 void			init_bonus_struct(t_bonus *bonus);
-void			sdl_init(t_win *win, t_env *env, char *argv);
+void			sdl_init(t_win *win, t_env *env);
 void			init_bonus_arg(t_env *env, char **argv);
 /*
 ** get_info_header.c
@@ -176,12 +176,12 @@ void			sdl_clear(t_win *win);
 /*
 ** keyboard.c
 */
-int				event(t_env *env, t_win *win, t_bonus *bonus, char *argv);
+int				event(t_env *env, t_win *win, t_bonus *bonus);
 void			draw(t_win *win, t_env *env);
 void			fill_from_up_left(t_env *env);
 void			fill_from_down_right(t_env *env);
 void			len_piece_xy(t_env *env);
 int				check_if_ennemi(t_env *env);
-void			quit_filler(t_env *env, t_win *win, char *argv);
+void			quit_filler(t_env *env, t_win *win);
 
 #endif

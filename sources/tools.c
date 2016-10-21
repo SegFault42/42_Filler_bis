@@ -47,6 +47,7 @@ void	init_filler_struct(t_env *env)
 	env->empty_line_form_up = 0;
 	env->empty_line_form_down = 0;
 	env->empty_point_form_left = 0;
+	env->empty_point_form_right = 0;
 	env->player = NULL;
 	env->other = NULL;
 	env->player_min = NULL;

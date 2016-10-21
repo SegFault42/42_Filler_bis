@@ -23,7 +23,7 @@ END = \033[0m
 ##################################_COMPILATION_#################################
 NAME = rabougue.filler
 CC = gcc
-FLAG = -Wall #-Wextra -Werror -O3 # -g
+FLAG = -Wall -Wextra -Werror -O3
 LFT = ./libft/libft.a
 SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c\
 		./sources/bonus.c ./sources/count.c ./sources/place_piece.c \

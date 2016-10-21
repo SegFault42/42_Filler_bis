@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keyboard.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/21 19:21:22 by rabougue          #+#    #+#             */
+/*   Updated: 2016/09/23 22:19:24 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/filler.h"
 
 static void	screenshot(t_env *env, t_win *win)
@@ -6,8 +18,9 @@ static void	screenshot(t_env *env, t_win *win)
 	static int	number_screen = 0;
 	char		*name;
 	char		*num;
-	char		test[16] = "Screenshot";
+	char		test[16];
 
+	ft_strcpy(test, "Screenshot");
 	num = ft_itoa(number_screen);
 	name = ft_strcat(test, num);
 	free(num);
@@ -22,7 +35,7 @@ static void	screenshot(t_env *env, t_win *win)
 	++number_screen;
 }
 
-static void	key1(SDL_Event *event, t_env *env, t_win *win, char *argv)
+static void	key1(SDL_Event *event, t_env *env, t_win *win)
 {
 	if (event->key.type == SDL_KEYDOWN && event->key.repeat == 0)
 	{
@@ -38,17 +51,17 @@ static void	key1(SDL_Event *event, t_env *env, t_win *win, char *argv)
 		if (event->key.keysym.sym == SDLK_SPACE)
 			SDL_Delay(2000);
 		if (event->key.keysym.sym == SDLK_ESCAPE)
-			quit_filler(env, win, argv);
+			quit_filler(env, win);
 	}
 }
 
-int			event(t_env *env, t_win *win, t_bonus *bonus, char *argv)
+int			event(t_env *env, t_win *win, t_bonus *bonus)
 {
 	SDL_Event	event;
 
 	if (SDL_PollEvent(&event))
 	{
-		key1(&event, env, win, argv);
+		key1(&event, env, win);
 		if (event.key.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.sym == SDLK_MINUS)

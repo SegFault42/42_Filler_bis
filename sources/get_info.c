@@ -26,6 +26,7 @@ void	get_piece(t_env *env)
 	int		i;
 
 	i = 0;
+	line = NULL;
 	get_size_piece(env);
 	while (i < env->size_form_y)
 	{
@@ -43,6 +44,8 @@ void	get_size_piece(t_env *env)
 	int		i;
 
 	i = 0;
+	line = NULL;
+	len  = NULL;
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
 		if (ft_strstr(line, "Piece ") != NULL)
@@ -67,6 +70,7 @@ void	get_map(t_env *env)
 	int		i;
 
 	i = 0;
+	line = NULL;
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
 		if (ft_isdigit(line[0]) != 0)
@@ -81,7 +85,6 @@ void	get_map(t_env *env)
 		}
 		free(line);
 	}
-	env->step = 1;
 }
 
 void	get_size_map(t_env *env)
@@ -91,6 +94,8 @@ void	get_size_map(t_env *env)
 	char	*len;
 
 	i = 0;
+	line = NULL;
+	len  = NULL;
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
 		if (ft_strstr(line, "Plateau ") != NULL)

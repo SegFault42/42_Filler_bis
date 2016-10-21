@@ -1,5 +1,4 @@
-seed = 5974
-O: error on input
-./resources/players/carli.filler won
+seed = 8545
+./rabougue.filler -mpgraphic won
 Score:
-20AGAINST317
+108AGAINST61

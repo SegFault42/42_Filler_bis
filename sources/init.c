@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/21 19:21:22 by rabougue          #+#    #+#             */
+/*   Updated: 2016/09/23 22:19:24 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/filler.h"
 
 void	init_bonus_struct(t_bonus *bonus)
@@ -10,7 +22,7 @@ void	init_bonus_struct(t_bonus *bonus)
 	bonus->volume = 128;
 }
 
-void	sdl_init(t_win *win, t_env *env, char *argv)
+void	sdl_init(t_win *win, t_env *env)
 {
 	if (env->size_map_x < 25)
 		win->size_plateau = 30;

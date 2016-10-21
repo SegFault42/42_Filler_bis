@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_2d_tab.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/21 19:21:22 by rabougue          #+#    #+#             */
+/*   Updated: 2016/09/23 22:19:24 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./includes/libft.h"
 
 void	ft_print_2d_tab(char **tab, int size_y)
@@ -14,7 +26,7 @@ void	ft_print_2d_tab(char **tab, int size_y)
 			ft_putchar(tab[j][i]);
 			i++;
 		}
-			ft_putchar('\n');
+		ft_putchar('\n');
 		j++;
 		i = 0;
 	}

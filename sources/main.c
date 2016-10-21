@@ -29,7 +29,7 @@ void	filler_loop(t_env *env)
 	split_map(env);
 }
 
-void	quit_filler(t_env *env, t_win *win, char *argv)
+void	quit_filler(t_env *env, t_win *win)
 {
 	if (env->b_graphic == 1)
 	{
@@ -46,17 +46,18 @@ void	quit_filler(t_env *env, t_win *win, char *argv)
 	exit(EXIT_SUCCESS);
 }
 
-int		main_loop(t_win *win, t_env *env, t_bonus *bonus, char **argv)
+int		main_loop(t_win *win, t_env *env, t_bonus *bonus)
 {
 	char	*line;
 
+	line = NULL;
 	win->loop = 1;
 	while (win->loop)
 	{
 		while (get_next_line(STDIN_FILENO, &line) > 0)
 		{
 			if (env->b_graphic == 1)
-				event(env, win, bonus, argv[1]);
+				event(env, win, bonus);
 			filler_loop(env);
 			free(line);
 			if (env->b_graphic == 1)
@@ -80,15 +81,15 @@ int		main(int argc, char **argv)
 	init_and_info_header(&env, &bonus, argv[0]);
 	init_bonus_arg(&env, argv);
 	if (env.b_graphic == 1)
-		sdl_init(&win, &env, argv[1]);
-	main_loop(&win, &env, &bonus, argv);
+		sdl_init(&win, &env);
+	main_loop(&win, &env, &bonus);
 	if (argc == 2)
 		arguments(argv, &bonus, &env);
 	if (env.b_graphic == 1)
 	{
 		while (0xDEADBEEF)
-			if (event(&env, &win, &bonus, argv[1]) == -2)
+			if (event(&env, &win, &bonus) == -2)
 				break ;
 	}
-	quit_filler(&env, &win, argv[1]);
+	quit_filler(&env, &win);
 }
