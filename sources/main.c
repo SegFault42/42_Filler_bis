@@ -32,12 +32,13 @@ void	filler_loop(t_env *env)
 void	quit_filler(t_env *env, t_win *win, char *argv)
 {
 	if (env->b_graphic == 1)
-		close_window(win);
-	if (env->b_sound == 1)
 	{
-		Mix_FreeMusic(win->music);
-		Mix_CloseAudio();
+		close_window(win);
+		Mix_FreeChunk(win->chunk);
 	}
+	if (env->b_sound == 1)
+		Mix_FreeMusic(win->music);
+	Mix_CloseAudio();
 	tab_free(env->piece, env->size_map_y);
 	tab_free(env->map, env->size_map_y);
 	free(env->player);
@@ -49,6 +50,7 @@ int		main_loop(t_win *win, t_env *env, t_bonus *bonus, char **argv)
 {
 	char	*line;
 
+	win->loop = 1;
 	while (win->loop)
 	{
 		while (get_next_line(STDIN_FILENO, &line) > 0)

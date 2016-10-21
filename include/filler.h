@@ -37,12 +37,12 @@
 ** if a player == 4, the player is player one and he is lower in the map.
 ** if a player == 5, the player is player two and he is higher in the map.
 ** if a player == 6, the player is player two and he is lower in the map.
-*==============================================================================
-*/
-/*=============================================================================
+** ============================================================================
+**
+** ============================================================================
 ** form = carre entier (donner par la vm)
 ** piece = uniquement la piece dessiner par les etoiles
-*==============================================================================
+** ============================================================================
 */
 typedef struct	s_env
 {
@@ -115,6 +115,7 @@ typedef struct	s_win
 	int			size_piece;
 	int			loop;
 	Mix_Music	*music;
+	Mix_Chunk	*chunk;
 }				t_win;
 /*
 ** get_info.c

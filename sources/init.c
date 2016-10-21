@@ -12,7 +12,6 @@ void	init_bonus_struct(t_bonus *bonus)
 
 void	sdl_init(t_win *win, t_env *env, char *argv)
 {
-	win->loop = 1;
 	if (env->size_map_x < 25)
 		win->size_plateau = 30;
 	else if (env->size_map_x >= 25 && env->size_map_x < 70)
@@ -21,10 +20,13 @@ void	sdl_init(t_win *win, t_env *env, char *argv)
 		win->size_plateau = 8;
 	win->size_piece = win->size_plateau;
 	init_window(WIN_WIDTH, WIN_HEIGHT, win);
+	SDL_Init(SDL_INIT_AUDIO);
+	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
+	Mix_AllocateChannels(1);
+	Mix_Volume(1, MIX_MAX_VOLUME);
+	win->chunk = Mix_LoadWAV("./media/sound/screenshot.wav");
 	if (env->b_sound == 1)
 	{
-		SDL_Init(SDL_INIT_AUDIO);
-		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
 		win->music = Mix_LoadMUS("./media/sound/Music2.mp3");
 		Mix_PlayMusic(win->music, -1);
 	}

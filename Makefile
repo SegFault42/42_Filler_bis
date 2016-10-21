@@ -70,13 +70,13 @@ $(NAME): $(OBJS)
 
 clean:
 	@printf "                                                               \r"
-	@printf "✅  all .o deleted\r"
+	@printf "✅  all .o deleted\n"
 	@rm -f $(OBJS)
 	@make -s clean -C ./libft/
 
 fclean:
 	@printf "                                                               \r"
-	@printf "✅  libft.a, all .o and rabougue.filler deleted\r"
+	@printf "✅  libft.a, all .o and rabougue.filler deleted\n"
 	@rm -f $(NAME) $(CHECKER) $(OBJS) $(OBJS_CHECKER)
 	@make -s fclean -C ./libft/
 
