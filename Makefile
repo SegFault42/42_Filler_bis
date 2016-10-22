@@ -28,8 +28,8 @@ LFT = ./libft/libft.a
 SRCS = ./sources/main.c ./sources/get_info.c ./sources/tools.c\
 		./sources/bonus.c ./sources/count.c ./sources/place_piece.c \
 		./sources/fill_up_form_left.c ./sources/fill_down_form_right.c\
-		./sources/window.c ./sources/sdl_draw.c ./sources/algo.c ./sources/init.c\
-		./sources/get_info_header.c ./sources/keyboard.c\
+		./sources/window.c ./sources/sdl_draw.c ./sources/algo.c \
+		./sources/init.c ./sources/get_info_header.c ./sources/keyboard.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -77,7 +77,7 @@ clean:
 fclean:
 	@printf "                                                               \r"
 	@printf "✅  libft.a, all .o and rabougue.filler deleted\n"
-	@rm -f $(NAME) $(CHECKER) $(OBJS) $(OBJS_CHECKER)
+	@rm -f $(NAME) $(OBJS)
 	@make -s fclean -C ./libft/
 
 re: fclean all
