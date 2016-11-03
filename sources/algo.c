@@ -12,9 +12,11 @@
 
 #include "../include/filler.h"
 
-/*=============================================================================
+/*
+** =============================================================================
 ** Check who is higher and who is first player. See filler.h for more info.
 */
+
 static int	check_who_is_higher_2(t_env *env, int i)
 {
 	if (ft_strstr(env->map[i], "X") != NULL)

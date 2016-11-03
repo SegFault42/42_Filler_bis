@@ -16,7 +16,7 @@ static void	calc_map(t_env *env, t_bonus *bonus)
 {
 	while (bonus->y++ < env->size_map_y - 1)
 	{
-		bonus->x = - 1;
+		bonus->x = -1;
 		while (bonus->x++ < env->size_map_x - 1)
 		{
 			if (env->map[bonus->y][bonus->x] == 'O' ||
@@ -86,7 +86,7 @@ void		aff_map(t_env *env, t_bonus *bonus)
 {
 	while (bonus->y++ < env->size_map_y - 1)
 	{
-		bonus->x = - 1;
+		bonus->x = -1;
 		while (bonus->x++ < env->size_map_x - 1)
 			count_and_color_map(bonus, env);
 		ft_putstr_fd(END"\n", 2);

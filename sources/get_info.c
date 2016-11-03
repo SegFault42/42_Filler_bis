@@ -45,7 +45,7 @@ void	get_size_piece(t_env *env)
 
 	i = 0;
 	line = NULL;
-	len  = NULL;
+	len = NULL;
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
 		if (ft_strstr(line, "Piece ") != NULL)
@@ -95,7 +95,7 @@ void	get_size_map(t_env *env)
 
 	i = 0;
 	line = NULL;
-	len  = NULL;
+	len = NULL;
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
 		if (ft_strstr(line, "Plateau ") != NULL)

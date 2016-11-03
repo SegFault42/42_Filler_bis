@@ -1,4 +1,6 @@
-seed = 8545
-./rabougue.filler -mpgraphic won
+seed = 1431
+O: error on input
+X: error on input
+./resources/players/abanlin.filler won
 Score:
-108AGAINST61
+103AGAINST239
