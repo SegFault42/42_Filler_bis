@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 19:21:22 by rabougue          #+#    #+#             */
-/*   Updated: 2016/09/23 22:19:24 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/08 19:24:13 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,14 @@ void		fill_from_down_right(t_env *env)
 		ffdr.piece_x = 0;
 		while (ffdr.piece_x < env->size_form_x)
 		{
-			if ((env->map[DRPY + DRMY][DRPX + DRMX] == env->player_min[0] ||
-			env->map[DRPY + DRMY][DRPX + DRMX] == env->player[0]) &&
-			env->piece[DRPY][DRPX] == '*')
+			/*if ((env->map[DRPY + DRMY][DRPX + DRMX] == env->player_min[0] ||*/
+			/*env->map[DRPY + DRMY][DRPX + DRMX] == env->player[0]) &&*/
+			/*env->piece[DRPY][DRPX] == '*')*/
+			if ((env->piece[DRPY][DRPX] == '*' && (env->map[DRPY + DRMY][DRPX + DRMX] == env->player_min[0] || env->map[DRPY + DRMY][DRPX + DRMX] == env->player[0])))
 				ffdr.me++;
-			else if (env->map[DRPY + DRMY][DRPX + DRMX] != '.' &&
-			env->piece[DRPY][DRPX] == '*')
+			/*else if (env->map[DRPY + DRMY][DRPX + DRMX] != '.' &&*/
+			/*env->piece[DRPY][DRPX] == '*')*/
+			else if (env->piece[DRPY][DRPX] == '*' && env->map[DRPY + DRMY][DRPX + DRMX] != '.')
 				ffdr.ennemi++;
 			++ffdr.piece_x;
 		}

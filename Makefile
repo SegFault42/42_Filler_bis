@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/09/22 01:49:33 by rabougue         ###   ########.fr        #
+#    Updated: 2016/11/08 15:19:56 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,3 +81,7 @@ fclean:
 	@make -s fclean -C ./libft/
 
 re: fclean all
+
+norminette:
+	@norminette ./libft/*.c ./libft/includes/*.h ./libft/ft_fprintf/sources/*.c\
+	./libft/ft_fprintf/includes/*.h ./include/filler.h ./sources/*.c
