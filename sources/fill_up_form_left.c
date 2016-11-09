@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 19:21:22 by rabougue          #+#    #+#             */
-/*   Updated: 2016/11/08 19:21:40 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/11/09 16:09:15 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ void		fill_from_up_left(t_env *env)
 		fful.piece_x = 0;
 		while (fful.piece_x < env->size_form_x)
 		{
-			if (env->piece[ULPY][ULPX] == '*' && (env->map[ULPY + ULMY][ULPX + ULMX] == env->player_min[0] || env->map[ULPY + ULMY][ULPX + ULMX] == env->player[0]))
-			/*if ((env->map[ULPY + ULMY][ULPX + ULMX] == env->player_min[0] ||*/
-				/*env->map[ULPY + ULMY][ULPX + ULMX] == env->player[0]) &&*/
-				/*env->piece[ULPY][ULPX] == '*')*/
+			if (env->piece[ULPY][ULPX] == '*' &&
+				(env->map[ULPY + ULMY][ULPX + ULMX] == env->player_min[0] ||
+				env->map[ULPY + ULMY][ULPX + ULMX] == env->player[0]))
 				fful.me++;
-			else if (env->piece[ULPY][ULPX] == '*' && env->map[ULPY + ULMY][ULPX + ULMX] != '.' )
+			else if (env->piece[ULPY][ULPX] == '*' &&
+				env->map[ULPY + ULMY][ULPX + ULMX] != '.')
 				fful.ennemi++;
 			++fful.piece_x;
 		}
